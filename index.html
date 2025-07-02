@@ -40,6 +40,22 @@
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
 
+    if (!form) return;
+
+    // Crear usuario predeterminado si no hay usuarios registrados
+    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    if (usuariosGuardados.length === 0) {
+      const usuarioInicial = {
+        id: "MTMENDOZA",
+        clave: "C8KM1Y0F1I3K1S6H",
+        nombres: "MAX TAYSON MENDOZA ACUÑA",
+        cargo: "GERENTE"
+      };
+      localStorage.setItem("usuarios", JSON.stringify([usuarioInicial]));
+      console.log("Usuario inicial creado: MTMENDOZA / C8KM1Y0F1I3K1S6H");
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -61,7 +77,7 @@
       alert(`¡BIENVENIDO, ${usuarioEncontrado.nombres.toUpperCase()}!`);
 
       switch (cargo) {
-        case "supervisor":
+        case "gerente":
           window.location.href = "Botones.html";
           break;
         case "supervisor":
@@ -71,10 +87,13 @@
           break;
         default:
           window.location.href = "BotonesInv.html";
+          break;
       }
     });
   });
 </script>
+
+
 
 </body>
 </html>
