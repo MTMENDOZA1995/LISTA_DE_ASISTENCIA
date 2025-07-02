@@ -23,7 +23,7 @@
 
         <div class="form-group">
           <label for="contrasena">CONTRASEÑA:</label>
-          <input type="password" id="contrasena" placeholder="INGRESE SU CONTRASEÑA" required />
+          <input type="password" id="contrasena" placeholder="INGRESE SU CONTRASEÑA" required oninput="this.value = this.value.toUpperCase()" />
         </div>
 
         <button type="submit">INICIAR SESIÓN</button>
@@ -47,10 +47,13 @@
 
     if (usuariosGuardados.length === 0) {
       const usuarioInicial = {
+        codigo: "116224516",
+        dni: "73372032",
+        apellidos: "MENDOZA ACUÑA",
+        nombres: "MAX TAYSON",
+        cargo: "GERENTE",
         id: "MTMENDOZA",
-        clave: "C8KM1Y0F1I3K1S6H",
-        nombres: "MAX TAYSON MENDOZA ACUÑA",
-        cargo: "GERENTE"
+        clave: "C8KM1Y0F1I3K1S6H"
       };
       localStorage.setItem("usuarios", JSON.stringify([usuarioInicial]));
       console.log("Usuario inicial creado: MTMENDOZA / C8KM1Y0F1I3K1S6H");
@@ -59,9 +62,9 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const usuario    = document.getElementById("usuario").value.trim().toUpperCase();
+      const usuario = document.getElementById("usuario").value.trim().toUpperCase();
       const contrasena = document.getElementById("contrasena").value.trim();
-      const usuarios   = JSON.parse(localStorage.getItem("usuarios")) || [];
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
       const usuarioEncontrado = usuarios.find(u =>
         u.id.toUpperCase() === usuario && u.clave === contrasena
@@ -92,8 +95,6 @@
     });
   });
 </script>
-
-
 
 </body>
 </html>
