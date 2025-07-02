@@ -196,29 +196,93 @@ body {
   filter: brightness(1.2);
 }
 
-/* =================== RESPONSIVE =================== */
+/* =================== RESPONSIVE OPTIMIZADO PARA CELULAR (S24) =================== */
 @media (max-width: 430px) {
-  .form {
-    padding: 20px 16px;
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    background: var(--bg-gradient, #f8f9fa);
   }
 
-  .form input {
-    font-size: 14px;
-  }
-
-  .form label {
-    font-size: 14px;
-  }
-
-  .form button {
-    font-size: 14px;
+  .container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
   }
 
   .header {
-    font-size: 0.85rem;
+    font-size: 1rem;
+    padding: 16px;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  .form {
+    padding: 20px 16px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .form label {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .form input {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .form button {
+    font-size: 1rem;
+    padding: 13px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+
+  .footer {
+    padding: 10px 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    background-color: var(--footer-bg, #f9f9f9);
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .footer img {
+    height: 40px;
   }
 
   .footer span {
     font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .card-footer {
+    font-size: 0.8rem;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .card-footer .logo {
+    width: 65px;
+    height: auto;
+    margin: 6px auto;
+    display: block;
   }
 }
