@@ -124,6 +124,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
     background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .menu-container {
@@ -134,40 +135,83 @@ body {
     box-shadow: none;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
   }
 
   .menu-header {
     font-size: 1.1rem;
     padding: 16px;
+    background-color: #1d3b20;
+    color: white;
+    font-weight: bold;
     border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu-header .icon-ecfm {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
   }
 
   .menu-buttons {
-    padding: 20px 16px;
     flex: 1;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    padding: 20px 16px;
+    overflow-y: auto;
   }
 
   .menu-buttons button {
+    width: 100%;
     font-size: 1rem;
     padding: 14px;
     border-radius: 8px;
     margin-bottom: 16px;
+    border: 2px solid #1d3b20;
+    background-color: #fff;
+    color: #1d3b20;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .menu-buttons button:hover {
+    background-color: #1d3b20;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .icon {
     width: 36px;
     height: 36px;
+    transition: transform 0.2s ease;
+  }
+
+  .icon-link:hover .icon {
+    transform: scale(1.1);
   }
 
   .menu-footer {
     font-size: 0.85rem;
     padding: 12px;
     border-radius: 0;
+    text-align: center;
+    color: #1d3b20;
+    background-color: #f4f6f5;
+    border-top: 1px solid #ccc;
   }
 
   .menu-footer img.logo {
     width: 70px;
+    height: auto;
+    margin-bottom: 5px;
   }
 }
