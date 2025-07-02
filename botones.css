@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* ========== BODY ========== */
+/* ========== BODY (GENERAL PARA PANTALLAS GRANDES) ========== */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #f8f9fa, #e6ecf0);
@@ -14,6 +14,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  overflow: hidden;
 }
 
 /* ========== CONTENEDOR PRINCIPAL ========== */
@@ -63,14 +64,14 @@ body {
   text-transform: uppercase;
   border-radius: 6px;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .menu-buttons button:hover {
   background-color: #1d3b20;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ========== ENLACE CON ÍCONO ========== */
@@ -78,7 +79,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0px;
+  padding: 0;
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -109,6 +110,66 @@ body {
   width: 80px;
   height: auto;
   margin-bottom: 5px;
+}
+
+/* ========== RESPONSIVE PARA SAMSUNG S24 Y OTROS CELULARES ========== */
+@media (max-width: 480px) {
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #f8f9fa;
+  }
+
+  .menu-container {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-header {
+    font-size: 1.1rem;
+    padding: 16px;
+    border-radius: 0;
+  }
+
+  .menu-buttons {
+    padding: 20px 16px;
+    flex: 1;
+    overflow-y: auto;
+    justify-content: center;
+  }
+
+  .menu-buttons button {
+    font-size: 1rem;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .menu-footer {
+    font-size: 0.85rem;
+    padding: 12px;
+    border-radius: 0;
+  }
+
+  .menu-footer img.logo {
+    width: 70px;
+  }
 }
 
 /* ========== RESPONSIVE AJUSTES ========== */
