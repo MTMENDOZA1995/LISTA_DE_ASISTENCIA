@@ -58,7 +58,7 @@
 
       <div class="form-group">
         <label for="clave">CONTRASEÑA:</label>
-        <input type="text" id="clave" name="clave" placeholder="Ingresa tu contraseña" minlength="6" maxlength="20" required>
+        <input type="text" id="clave" name="clave" placeholder="Ingresa tu contraseña" minlength="6" maxlength="20" required oninput="this.value = this.value.toUpperCase()" />
       </div>
 
       <button type="submit">GUARDAR CAMBIOS</button>
