@@ -5,33 +5,26 @@
   box-sizing: border-box;
 }
 
-/* ========== BASE GLOBAL ========== */
-html, body {
-  width: 100vw;
-  height: 100vh;
+/* ========== BODY (GENERAL PARA PANTALLAS GRANDES) ========== */
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #f8f9fa, #e6ecf0);
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 20px;
   overflow: hidden;
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
 }
 
 /* ========== CONTENEDOR PRINCIPAL ========== */
 .menu-container {
   width: 100%;
-  max-width: 420px;
-  height: auto;
+  max-width: 400px;
   background-color: #ffffff;
   border-radius: 12px;
   border: 1.5px solid #1d3b20;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
@@ -39,36 +32,39 @@ html, body {
 .menu-header {
   background-color: #1d3b20;
   color: white;
-  padding: 16px;
-  text-align: center;
-  font-size: 1.1rem;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
   font-weight: bold;
   letter-spacing: 1px;
+  border-radius: 12px 12px 0 0;
+}
+
+.menu-header .icon {
+  font-size: 24px;
+  margin-right: 10px;
 }
 
 /* ========== BOTONES ========== */
 .menu-buttons {
   padding: 24px 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto;
 }
 
 .menu-buttons button {
   width: 100%;
   padding: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
   background-color: #ffffff;
   border: 2px solid #1d3b20;
   color: #1d3b20;
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .menu-buttons button:hover {
@@ -78,20 +74,21 @@ html, body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ========== ICONOS (ENLACES CON ÍCONO) ========== */
+/* ========== ENLACE CON ÍCONO ========== */
 .icon-link {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  text-decoration: none;
+  padding: 0;
   border-radius: 8px;
   transition: background-color 0.3s, transform 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   transition: transform 0.2s ease;
 }
 
@@ -102,59 +99,75 @@ html, body {
 /* ========== PIE DE MENÚ ========== */
 .menu-footer {
   text-align: center;
-  padding: 12px;
-  font-size: 0.9rem;
+  padding: 10px;
+  border-top: 1px solid #ddd;
   color: #1d3b20;
+  font-weight: bold;
   background-color: #f4f6f5;
-  border-top: 1px solid #ccc;
 }
 
 .menu-footer img.logo {
-  width: 70px;
+  width: 80px;
   height: auto;
   margin-bottom: 5px;
 }
 
-/* ========== RESPONSIVE PARA SAMSUNG S24 Y CELULARES MODERNOS ========== */
+/* ========== RESPONSIVE PARA SAMSUNG S24 Y OTROS CELULARES ========== */
 @media (max-width: 480px) {
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #f8f9fa;
+  }
+
   .menu-container {
     width: 100vw;
     height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    border-radius: 0;
     border: none;
+    border-radius: 0;
     box-shadow: none;
+    display: flex;
+    flex-direction: column;
   }
 
   .menu-header {
-    font-size: 1.2rem;
-    padding: 18px;
+    font-size: 1.1rem;
+    padding: 16px;
+    border-radius: 0;
   }
 
   .menu-buttons {
     padding: 20px 16px;
+    flex: 1;
+    overflow-y: auto;
     justify-content: center;
   }
 
   .menu-buttons button {
     font-size: 1rem;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
   }
 
   .menu-footer {
     font-size: 0.85rem;
-    padding: 10px;
+    padding: 12px;
+    border-radius: 0;
   }
 
   .menu-footer img.logo {
-    width: 65px;
-  }
-
-  .icon {
-    width: 34px;
-    height: 34px;
+    width: 70px;
   }
 }
