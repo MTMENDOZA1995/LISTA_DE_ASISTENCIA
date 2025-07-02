@@ -193,35 +193,40 @@
 </script>
 
 <script>
-  // Redirigir al INDEX.html al recargar la página
-  window.addEventListener("beforeunload", () => {
-    localStorage.setItem("redirectOnLoad", "true");
-  });
+  // Función para cerrar sesión
+  function cerrarSesion(mensaje) {
+    alert(mensaje || "🔒 Sesión finalizada.");
+    sessionStorage.clear(); // Limpia datos de sesión
+    window.location.href = "index.html";
+  }
 
+  // Validar si hay sesión activa al cargar la página
   window.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("redirectOnLoad") === "true") {
-      localStorage.removeItem("redirectOnLoad");
-      window.location.href = "index.html";
+    // Si no hay sesión activa, redirigir inmediatamente
+    if (!sessionStorage.getItem("sesionActiva")) {
+      cerrarSesion("⚠️ ACCESO NO AUTORIZADO. SESIÓN CERRADA.");
+      return;
     }
 
-    // Redirigir después de 5 minutos de inactividad
+    // Redirigir por inactividad
     let timer;
-    const redireccionar = () => {
-      alert("⏰ TIEMPO DE INACTIVIDAD SUPERADO. SERÁS REDIRIGIDO.");
-      window.location.href = "index.html";
-    };
-
     const reiniciarTemporizador = () => {
       clearTimeout(timer);
-      timer = setTimeout(redireccionar, 5 * 60 * 1000); // 5 minutos
+      timer = setTimeout(() => {
+        cerrarSesion("⏰ INACTIVIDAD DETECTADA. SESIÓN CERRADA.");
+      }, 5 * 60 * 1000); // 5 minutos
     };
 
-    // Eventos que reinician el temporizador
     ["mousemove", "keydown", "click", "scroll"].forEach(evento => {
       document.addEventListener(evento, reiniciarTemporizador);
     });
 
-    reiniciarTemporizador(); // Inicia el temporizador al cargar
+    reiniciarTemporizador();
+  });
+
+  // Al recargar o cerrar la pestaña, la sesión sigue activa
+  window.addEventListener("beforeunload", () => {
+    // Opcional: puedes guardar el tiempo de salida si deseas
   });
 </script>
 
