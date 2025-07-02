@@ -168,7 +168,7 @@ body {
 /* =====================================================
    RESPONSIVE PROFESIONAL PARA SAMSUNG GALAXY S24 Y OTROS
 ===================================================== */
-@media (max-width: 768px) {
+@media (max-width: 430px) {
   html, body {
     width: 100vw;
     height: 100vh;
