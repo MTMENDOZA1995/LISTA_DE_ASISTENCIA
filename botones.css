@@ -129,14 +129,15 @@ body {
 
   .menu-container {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     border: none;
     border-radius: 0;
     box-shadow: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .menu-header {
@@ -207,6 +208,7 @@ body {
     color: #1d3b20;
     background-color: #f4f6f5;
     border-top: 1px solid #ccc;
+    display: none;
   }
 
   .menu-footer img.logo {
