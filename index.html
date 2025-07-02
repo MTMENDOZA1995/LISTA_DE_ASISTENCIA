@@ -49,11 +49,11 @@
       const usuarioInicial = {
         codigo: "116224516",
         dni: "73372032",
-        apellidos: "MENDOZA ACUÑA",
+        Apellidos: "MENDOZA ACUÑA",
         nombres: "MAX TAYSON",
         cargo: "GERENTE",
         id: "MTMENDOZA",
-        clave: "C8KM1Y0F1I3K1S6H"
+        clave: "C8KM1Y0F1I3K1S6H",
       };
       localStorage.setItem("usuarios", JSON.stringify([usuarioInicial]));
       console.log("Usuario inicial creado: MTMENDOZA / C8KM1Y0F1I3K1S6H");
@@ -62,9 +62,9 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const usuario = document.getElementById("usuario").value.trim().toUpperCase();
+      const usuario    = document.getElementById("usuario").value.trim().toUpperCase();
       const contrasena = document.getElementById("contrasena").value.trim();
-      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      const usuarios   = JSON.parse(localStorage.getItem("usuarios")) || [];
 
       const usuarioEncontrado = usuarios.find(u =>
         u.id.toUpperCase() === usuario && u.clave === contrasena
@@ -75,9 +75,12 @@
         return;
       }
 
-      const cargo = usuarioEncontrado.cargo.trim().toLowerCase();
+      // ✅ ACTIVAR LA SESIÓN
+      sessionStorage.setItem("sesionActiva", "true");
 
       alert(`¡BIENVENIDO, ${usuarioEncontrado.nombres.toUpperCase()}!`);
+
+      const cargo = usuarioEncontrado.cargo.trim().toLowerCase();
 
       switch (cargo) {
         case "gerente":
@@ -95,6 +98,7 @@
     });
   });
 </script>
+
 
 </body>
 </html>
