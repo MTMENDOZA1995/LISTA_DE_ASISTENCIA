@@ -120,21 +120,62 @@ button:hover {
   border-radius: 0 0 8px 8px;
 }
 
-/* Responsivo para móviles pequeños */
-@media (max-width: 380px) {
+/* ✅ Estilo responsivo para móviles de alta gama como Samsung S24 */
+@media (max-width: 480px) {
+  html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+
   .login-card {
-    padding: 16px;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    padding: 20px 16px;
+    box-shadow: none;
+    justify-content: center;
   }
 
   .card-header {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 0;
   }
 
-  label, input, button {
-    font-size: 0.95rem;
+  .card-body {
+    padding: 20px 0;
   }
 
   .logo-box img {
-    width: 100px;
+    width: 60%;
+    max-width: 140px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  button {
+    font-size: 1.05rem;
+    padding: 12px;
+  }
+
+  .card-footer {
+    font-size: 0.85rem;
+    padding: 10px;
+    border-top: 1px solid #ddd;
   }
 }
