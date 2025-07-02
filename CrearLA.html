@@ -113,6 +113,43 @@
   });
 </script>
 
+<script>
+  // Función para cerrar sesión
+  function cerrarSesion(mensaje) {
+    alert(mensaje || "🔒 Sesión finalizada.");
+    sessionStorage.clear(); // Limpia datos de sesión
+    window.location.href = "index.html";
+  }
+
+  // Validar si hay sesión activa al cargar la página
+  window.addEventListener("DOMContentLoaded", () => {
+    // Si no hay sesión activa, redirigir inmediatamente
+    if (!sessionStorage.getItem("sesionActiva")) {
+      cerrarSesion("⚠️ ACCESO NO AUTORIZADO. SESIÓN CERRADA.");
+      return;
+    }
+
+    // Redirigir por inactividad
+    let timer;
+    const reiniciarTemporizador = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        cerrarSesion("⏰ INACTIVIDAD DETECTADA. SESIÓN CERRADA.");
+      }, 5 * 60 * 1000); // 5 minutos
+    };
+
+    ["mousemove", "keydown", "click", "scroll"].forEach(evento => {
+      document.addEventListener(evento, reiniciarTemporizador);
+    });
+
+    reiniciarTemporizador();
+  });
+
+  // Al recargar o cerrar la pestaña, la sesión sigue activa
+  window.addEventListener("beforeunload", () => {
+    // Opcional: puedes guardar el tiempo de salida si deseas
+  });
+</script>
 
 </body>
 </html>
