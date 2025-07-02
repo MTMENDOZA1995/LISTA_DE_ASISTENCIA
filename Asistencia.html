@@ -192,6 +192,38 @@
   };
 </script>
 
+<script>
+  // Redirigir al INDEX.html al recargar la página
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("redirectOnLoad", "true");
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("redirectOnLoad") === "true") {
+      localStorage.removeItem("redirectOnLoad");
+      window.location.href = "index.html";
+    }
+
+    // Redirigir después de 5 minutos de inactividad
+    let timer;
+    const redireccionar = () => {
+      alert("⏰ TIEMPO DE INACTIVIDAD SUPERADO. SERÁS REDIRIGIDO.");
+      window.location.href = "index.html";
+    };
+
+    const reiniciarTemporizador = () => {
+      clearTimeout(timer);
+      timer = setTimeout(redireccionar, 5 * 60 * 1000); // 5 minutos
+    };
+
+    // Eventos que reinician el temporizador
+    ["mousemove", "keydown", "click", "scroll"].forEach(evento => {
+      document.addEventListener(evento, reiniciarTemporizador);
+    });
+
+    reiniciarTemporizador(); // Inicia el temporizador al cargar
+  });
+</script>
 
 </body>
 </html>
