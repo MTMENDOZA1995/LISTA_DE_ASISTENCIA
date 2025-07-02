@@ -170,18 +170,20 @@ body {
 ===================================================== */
 @media (max-width: 480px) {
   html, body {
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
+    width: 100%;
+    height: auto;
     margin: 0;
-    overflow: hidden;
-    touch-action: none;
-    -webkit-user-select: none;
-    user-select: none;
-    background-color: #f8f9fa;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    -webkit-font-smoothing: antialiased;
   }
 
+  body {
+    display: block; /* Evita recortes por centrar con flex en pantallas pequeñas */
+  }
 
   .card {
     width: 100%;
@@ -189,6 +191,9 @@ body {
     border-radius: 0;
     box-shadow: none;
     border: none;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   .card-header {
@@ -196,6 +201,8 @@ body {
     font-size: 1rem;
     text-align: center;
     border-radius: 0;
+    background-color: #1d3b20;
+    color: white;
   }
 
   .card-header .header-content {
@@ -204,13 +211,16 @@ body {
   }
 
   .card-form {
+    flex: 1;
     padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
   }
 
   .card-form label {
     font-size: 1rem;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .card-form input,
@@ -218,13 +228,19 @@ body {
     font-size: 1rem;
     padding: 14px;
     border-radius: 6px;
+    border: 1.5px solid #ccc;
+    border-left: 4px solid #1d3b20;
   }
 
   .card-form button {
     font-size: 1rem;
-    padding: 16px;
+    padding: 14px;
     border-radius: 8px;
     margin-top: 12px;
+    background-color: #1d3b20;
+    color: #fff;
+    font-weight: bold;
+    border: none;
   }
 
   .card-footer {
@@ -232,6 +248,7 @@ body {
     font-size: 0.9rem;
     background-color: #f9f9f9;
     border-top: 1px solid #ccc;
+    text-align: center;
   }
 
   .card-footer .logo {
