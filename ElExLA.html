@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>EVENTOS DISPONIBLES</title>
   <link rel="stylesheet" href="EIExLA.css">
 </head>
@@ -48,9 +49,9 @@
       const boton = document.createElement("button");
       boton.className = "evento-btn";
       boton.innerHTML = `
-        <img src="Iconos/manosost.png" alt="Ver" class="icon-left">
+        <img src="Iconos/MANOSOST.png" alt="Ver" class="icon-left">
         <span class="texto">${evento.NombreEvento.toUpperCase()}</span>
-        <img src="Iconos/nextsost.png" alt="Ir" class="icon-right">
+        <img src="Iconos/NEXTSOST.png" alt="Ir" class="icon-right">
       `;
 
       boton.addEventListener("click", () => solicitarClave(evento));
@@ -113,3 +114,4 @@
 
 </body>
 </html>
+
