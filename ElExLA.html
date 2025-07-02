@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EVENTOS DISPONIBLES</title>
+  <link rel="stylesheet" href="EIExLA.css">
+</head>
+<body>
+
+  <div class="menu-container">
+    <div class="menu-header">
+      <a href="index.html" title="Ver eventos registrados">
+        <img src="Iconos/SALIR.png" alt="Ver eventos registrados" class="icon" />
+      </a>
+      <h2>LISTA DE EVENTOS</h2>
+    </div>
+
+    <div class="menu-buttons" id="contenedorEventos">
+      <!-- Aquí se insertarán los botones dinámicamente -->
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo">
+      </a>
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const contenedor = document.getElementById("contenedorEventos");
+    const eventos = JSON.parse(localStorage.getItem("CrearLA")) || [];
+
+    contenedor.innerHTML = '';
+
+    if (eventos.length === 0) {
+      contenedor.innerHTML = '<p style="text-align:center; color:gray;">NO HAY EVENTOS REGISTRADOS.</p>';
+      return;
+    }
+
+    eventos.forEach(evento => {
+      const boton = crearBotonEvento(evento);
+      contenedor.appendChild(boton);
+    });
+
+    function crearBotonEvento(evento) {
+      const boton = document.createElement("button");
+      boton.className = "evento-btn";
+      boton.innerHTML = `
+        <img src="Iconos/manosost.png" alt="Ver" class="icon-left">
+        <span class="texto">${evento.NombreEvento.toUpperCase()}</span>
+        <img src="Iconos/nextsost.png" alt="Ir" class="icon-right">
+      `;
+
+      boton.addEventListener("click", () => solicitarClave(evento));
+
+      return boton;
+    }
+
+    function solicitarClave(evento) {
+      const claveIngresada = prompt(`INGRESE LA CLAVE PARA EL EVENTO:\n"${evento.NombreEvento.toUpperCase()}"`);
+
+      if (claveIngresada === null) return;
+
+      if (claveIngresada === evento.Clave) {
+        localStorage.setItem("eventoSeleccionado", JSON.stringify(evento));
+        window.location.href = "Asistencia.html";
+      } else {
+        alert("❌ CLAVE INCORRECTA. ACCESO DENEGADO.");
+      }
+    }
+  });
+</script>
+
+
+</body>
+</html>
+

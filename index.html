@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INICIAR SESIÓN - ECO FRAME MAX</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-card">
+    <div class="card-header">
+      <h1>REGISTRO DE ASISTENCIAS</h1>
+    </div>
+    <div class="card-body">
+      <div class="logo-box">
+        <img src="IMAGENES/ECFM.png" alt="LOGO DE LA EMPRESA" />
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="usuario">USUARIO:</label>
+          <input type="text" id="usuario" placeholder="INGRESE SU USUARIO" required oninput="this.value = this.value.toUpperCase()" />
+        </div>
+
+        <div class="form-group">
+          <label for="contrasena">CONTRASEÑA:</label>
+          <input type="password" id="contrasena" placeholder="INGRESE SU CONTRASEÑA" required />
+        </div>
+
+        <button type="submit">INICIAR SESIÓN</button>
+      </form>
+    </div>
+    <div class="card-footer">
+      ECO FRAME MAX
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const usuario    = document.getElementById("usuario").value.trim().toUpperCase();
+      const contrasena = document.getElementById("contrasena").value.trim();
+      const usuarios   = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const usuarioEncontrado = usuarios.find(u =>
+        u.id.toUpperCase() === usuario && u.clave === contrasena
+      );
+
+      if (!usuarioEncontrado) {
+        alert("USUARIO O CONTRASEÑA INCORRECTOS.");
+        return;
+      }
+
+      const cargo = usuarioEncontrado.cargo.trim().toLowerCase();
+
+      alert(`¡BIENVENIDO, ${usuarioEncontrado.nombres.toUpperCase()}!`);
+
+      switch (cargo) {
+        case "gerente":
+          window.location.href = "Botones.html";
+          break;
+        case "supervisor":
+        case "administrador":
+        case "asistente":
+          window.location.href = "BotonesADM.html";
+          break;
+        default:
+          window.location.href = "BotonesInv.html";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

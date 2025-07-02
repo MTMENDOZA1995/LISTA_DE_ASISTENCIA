@@ -1,0 +1,142 @@
+/* ========== RESET GENERAL ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== BODY ========== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f8f9fa, #e6ecf0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+.menu-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1.5px solid #1d3b20;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+/* ========== ENCABEZADO ========== */
+.menu-header {
+  background-color: #1d3b20;
+  color: white;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 12px 12px 0 0;
+}
+
+.menu-header .icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+/* ========== BOTONES ========== */
+.menu-buttons {
+  padding: 24px 20px;
+}
+
+.menu-buttons button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border: 2px solid #1d3b20;
+  color: #1d3b20;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.menu-buttons button:hover {
+  background-color: #1d3b20;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* ========== ENLACE CON ÍCONO ========== */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.icon-link:hover .icon {
+  transform: scale(1.15);
+}
+
+/* ========== PIE DE MENÚ ========== */
+.menu-footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  color: #1d3b20;
+  font-weight: bold;
+  background-color: #f4f6f5;
+}
+
+.menu-footer img.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* ========== RESPONSIVE AJUSTES ========== */
+@media (max-width: 430px) {
+  .menu-container {
+    border-radius: 10px;
+  }
+
+  .menu-header {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .menu-buttons button {
+    font-size: 14px;
+    padding: 13px;
+  }
+
+  .menu-footer {
+    font-size: 13px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .menu-footer img.logo {
+    width: 70px;
+  }
+}

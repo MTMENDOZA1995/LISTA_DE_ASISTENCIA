@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REGISTRO DEL PERSONAL | Eco Frame Max</title>
+  <link rel="stylesheet" href="RegistroP.css" />
+</head>
+<body>
+
+  <main class="card">
+    
+    <!-- ENCABEZADO -->
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBPersonal.html" title="Ver usuarios registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver usuarios registrados" class="icon" />
+        </a>
+        <h1>REGISTRAR PERSONAL</h1>
+      </div>
+    </header>
+    
+    <!-- FORMULARIO DE REGISTRO -->
+    <form id="formRegistroPersonal" class="card-form" autocomplete="off" novalidate>
+      
+      <div class="form-group">
+        <label for="codigo">CÓDIGO:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Ej. P001" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" placeholder="8 dígitos" maxlength="8" pattern="\d{8}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos del personal" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="nombres">NOMBRES:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Nombres del personal" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">CARGO:</label>
+        <input type="text" id="cargo" name="cargo" placeholder="Ej. Operario, Supervisor" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="FechaNacimiento">FECHA DE NACIMIENTO:</label>
+        <input type="date" id="FechaNacimiento" name="FechaNacimiento" required />
+      </div>
+
+      <button type="submit" class="btn-submit">GUARDAR</button>
+    </form>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo" />
+      </a>
+    </footer>
+
+  </main>
+
+</body>
+</html>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formRegistroPersonal");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Obtener y limpiar valores del formulario
+      const persona = {
+        codigo: form.codigo.value.trim().toUpperCase(),
+        dni: form.dni.value.trim(),
+        apellidos: form.apellidos.value.trim().toUpperCase(),
+        nombres: form.nombres.value.trim().toUpperCase(),
+        cargo: form.cargo.value.trim().toUpperCase(),
+        fechaNacimiento: form.FechaNacimiento.value
+      };
+
+      // Validación: campos vacíos
+      if (Object.values(persona).some(campo => campo === "")) {
+        alert("⚠️ Por favor, completa todos los campos.");
+        return;
+      }
+
+      // Validación: DNI con exactamente 8 dígitos numéricos
+      if (!/^\d{8}$/.test(persona.dni)) {
+        alert("⚠️ El DNI debe contener exactamente 8 dígitos numéricos.");
+        return;
+      }
+
+      // Leer registros existentes
+      const personal = JSON.parse(localStorage.getItem("personal")) || [];
+
+      // Validación: código duplicado
+      if (personal.some(p => p.codigo === persona.codigo)) {
+        alert("⚠️ El código ya está registrado.");
+        return;
+      }
+
+      // Validación: DNI duplicado
+      if (personal.some(p => p.dni === persona.dni)) {
+        alert("⚠️ El DNI ya está registrado.");
+        return;
+      }
+
+      // Guardar nuevo personal en localStorage
+      personal.push(persona);
+      localStorage.setItem("personal", JSON.stringify(personal));
+
+      alert("✅ Personal registrado correctamente.");
+      form.reset();
+      window.location.href = "TBPersonal.html"; // Redirige a tabla del personal
+    });
+  });
+</script>
+
+
+</body>
+</html>
+

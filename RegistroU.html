@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGISTRAR USUARIO | Registro de Usuario</title>
+  <link rel="stylesheet" href="RegistroU.css">
+</head>
+<body>
+
+  <main class="card">
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBUsuarios.html" title="Ver usuarios registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver usuarios registrados" class="icon">
+        </a>
+        <h1>REGISTRAR USUARIO</h1>
+      </div>
+    </header>
+
+    <form class="card-form" id="formRegistroPersonal" autocomplete="off">
+      <div class="form-group">
+        <label for="codigo">CÓDIGO:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Coloque un codigo registrado" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" placeholder="Autollenado" maxlength="8" inputmode="numeric" readonly onfocus="this.blur()">
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Autollenado" readonly onfocus="this.blur()">
+      </div>
+
+      <div class="form-group">
+        <label for="nombres">NOMBRES:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Autollenado" readonly onfocus="this.blur()">
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">CARGO:</label>
+        <select id="cargo" name="cargo" required>
+          <option value="" disabled selected>Selecciona un cargo</option>
+          <option value="supervisor">SUPERVISOR</option>
+          <option value="administrador">ADMINISTRADOR</option>
+          <option value="asistente">ASISTENTE</option>
+          <option value="operario">OTRO</option>
+        </select>
+      </div>  
+
+      <div class="form-group">
+        <label for="iD">ID:</label>
+        <input type="text" id="id" name="id" placeholder="Cree un Usuario" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="clave">Contraseña:</label>
+        <input type="password" id="clave" name="clave" placeholder="Cree una contraseña" minlength="6" maxlength="20" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <button type="submit">REGISTRAR Y GUARDAR</button>
+    </form>
+
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo">
+      </a>
+    </footer>
+  </main>
+
+<script>
+  // Autocompletar campos desde localStorage "personal"
+  document.getElementById('codigo').addEventListener('blur', function () {
+    const codigo = this.value.trim().toUpperCase();
+    if (!codigo) {
+      limpiarCampos();
+      return;
+    }
+
+    const personal = JSON.parse(localStorage.getItem('personal')) || [];
+    const persona = personal.find(p => p.codigo === codigo);
+
+    if (persona) {
+      document.getElementById('dni').value = persona.dni || '';
+      document.getElementById('apellidos').value = persona.apellidos || '';
+      document.getElementById('nombres').value = persona.nombres || '';
+      document.getElementById('cargo').value = persona.cargo || '';
+      // document.getElementById('fechaNacimiento').value = persona.fechaNacimiento || '';
+    } else {
+      limpiarCampos();
+      alert("⚠️ Primero registre al nuevo personal.");
+    }
+  });
+
+  function limpiarCampos() {
+    document.getElementById('dni').value = '';
+    document.getElementById('apellidos').value = '';
+    document.getElementById('nombres').value = '';
+    document.getElementById('cargo').value = '';
+  }
+
+  // Guardar usuario
+  document.getElementById('formRegistroPersonal').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const usuario = {
+      codigo: document.getElementById('codigo').value.trim().toUpperCase(),
+      dni: document.getElementById('dni').value.trim(),
+      apellidos: document.getElementById('apellidos').value.trim().toUpperCase(),
+      nombres: document.getElementById('nombres').value.trim().toUpperCase(),
+      cargo: document.getElementById('cargo').value.trim().toUpperCase(),
+      id: document.getElementById('id').value.trim().toUpperCase(),
+      clave: document.getElementById('clave').value.trim()
+    };
+
+    // Validación de campos vacíos
+    for (const campo in usuario) {
+      if (!usuario[campo]) {
+        alert("⚠️ Por favor, completa todos los campos.");
+        return;
+      }
+    }
+
+    // Validación de DNI (8 dígitos numéricos)
+    if (!/^\d{8}$/.test(usuario.dni)) {
+      alert("⚠️ El DNI debe tener exactamente 8 dígitos.");
+      return;
+    }
+
+    // Validación de clave (mínimo 7 caracteres, letras y números)
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/.test(usuario.clave)) {
+      alert("⚠️ La clave debe tener al menos 7 caracteres e incluir letras y números.");
+      return;
+    }
+
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Validación de duplicados
+    if (usuarios.some(u => u.id === usuario.id)) {
+      alert("⚠️ El ID ya está registrado.");
+      return;
+    }
+
+    if (usuarios.some(u => u.codigo === usuario.codigo)) {
+      alert("⚠️ El CÓDIGO ya está registrado.");
+      return;
+    }
+
+    if (usuarios.some(u => u.dni === usuario.dni)) {
+      alert("⚠️ El DNI ya está registrado.");
+      return;
+    }
+
+    // Guardar usuario
+    usuarios.push(usuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    alert('✅ Usuario registrado correctamente.');
+    this.reset();
+    window.location.href = 'TBUsuarios.html';
+  });
+</script>
+
+
+</body>
+</html>
+

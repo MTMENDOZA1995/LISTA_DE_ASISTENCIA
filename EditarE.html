@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDITAR EVENTO | Eco Frame Max</title>
+  <link rel="stylesheet" href="CrearLA.css" />
+</head>
+<body>
+
+  <main class="container">
+    
+    <!-- ENCABEZADO -->
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBCrearLA.html" title="Ver eventos registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver eventos registrados" class="icon" />
+        </a>
+        <h1>EDITAR EVENTO</h1>
+      </div>
+    </header>
+
+    <!-- FORMULARIO DE EVENTO -->
+    <form id="formAsistencia" class="form" autocomplete="off">
+      
+      <div class="form-group">
+        <label for="nombre">Nombre del Evento:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. REUNIÓN MENSUAL" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="fecha">Fecha del Evento:</label>
+        <input type="date" id="fecha" name="fecha" required />
+      </div>
+
+      <div class="form-group">
+        <label for="hora">Hora de Entrada:</label>
+        <input type="time" id="hora" name="hora" required />
+      </div>
+
+      <div class="form-group">
+        <label for="clave">Clave de Seguridad:</label>
+        <input type="text" id="clave" name="clave" placeholder="Clave secreta" minlength="6" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <button type="submit" id="btnGuardar">Crear y Guardar</button>
+    </form>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo" />
+      </a>
+    </footer>
+    
+  </main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formAsistencia");
+    const btnGuardar = document.getElementById("btnGuardar");
+
+    const evento = JSON.parse(localStorage.getItem("eventoEditar"));
+    const index = localStorage.getItem("eventoEditarIndex");
+
+    // Rellenar formulario si se está editando
+    if (evento && index !== null) {
+      document.getElementById("nombre").value = evento.NombreEvento;
+      document.getElementById("fecha").value = evento.FechaEvento;
+      document.getElementById("hora").value = evento.HoraEntrante;
+      document.getElementById("clave").value = evento.Clave;
+      btnGuardar.textContent = "Guardar Cambios";
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const fecha = document.getElementById("fecha").value.trim();
+      const hora = document.getElementById("hora").value.trim();
+      const clave = document.getElementById("clave").value.trim();
+
+      if (!nombre || !fecha || !hora || !clave) {
+        alert("⚠️ Por favor, completa todos los campos.");
+        return;
+      }
+
+      // Validar formato de clave (mínimo 6 caracteres, letras y números)
+      const claveValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(clave);
+      if (!claveValida) {
+        alert("⚠️ La clave debe contener al menos 6 caracteres, incluyendo letras y números.");
+        return;
+      }
+
+      const nuevoEvento = {
+        NombreEvento: nombre,
+        FechaEvento: fecha,
+        HoraEntrante: hora,
+        Clave: clave
+      };
+
+      const eventos = JSON.parse(localStorage.getItem("CrearLA")) || [];
+
+      if (evento && index !== null) {
+        // Edición
+        eventos[parseInt(index)] = nuevoEvento;
+        alert("✅ Evento editado correctamente.");
+        localStorage.removeItem("eventoEditar");
+        localStorage.removeItem("eventoEditarIndex");
+      } else {
+        // Verificar duplicados antes de agregar
+        const existe = eventos.some(e =>
+          e.NombreEvento === nombre && e.FechaEvento === fecha
+        );
+
+        if (existe) {
+          alert("⚠️ Ya existe un evento con ese nombre en la misma fecha.");
+          return;
+        }
+
+        eventos.push(nuevoEvento);
+        alert("✅ Evento creado correctamente.");
+      }
+
+      localStorage.setItem("CrearLA", JSON.stringify(eventos));
+      form.reset();
+      window.location.href = "TBCrearLA.html";
+    });
+  });
+</script>
+
+
+</body>
+</html>

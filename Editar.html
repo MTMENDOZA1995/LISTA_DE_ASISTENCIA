@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDITAR DATOS DEL USUARIO | Editar Usuario</title>
+  <link rel="stylesheet" href="RegistroU.css">
+</head>
+<body>
+
+  <main class="card">
+
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBUsuarios.html" title="Ver usuarios registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver usuarios registrados" class="icon">
+        </a>
+        <h1>EDITAR USUARIO</h1>
+      </div>
+    </header>
+
+    <form class="card-form" id="formEditarUsuario" autocomplete="off">
+      <div class="form-group">
+        <label for="codigo">CÓDIGO:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Ej. P001" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" placeholder="8 dígitos" maxlength="8" inputmode="numeric" required>
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos del personal" required>
+      </div>
+
+      <div class="form-group">
+        <label for="nombres">NOMBRES:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Nombres del personal" required>
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">CARGO:</label>
+        <select id="cargo" name="cargo" required>
+          <option value="" disabled selected>Selecciona un cargo</option>
+          <option value="supervisor">SUPERVISOR</option>
+          <option value="administrador">ADMINISTRADOR</option>
+          <option value="asistente">ASISTENTE</option>
+          <option value="operario">OTRO</option>
+        </select>
+      </div> 
+
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" placeholder="Usuario" required>
+      </div>
+
+      <div class="form-group">
+        <label for="clave">CONTRASEÑA:</label>
+        <input type="text" id="clave" name="clave" placeholder="Ingresa tu contraseña" minlength="6" maxlength="20" required>
+      </div>
+
+      <button type="submit">GUARDAR CAMBIOS</button>
+    </form>
+
+    <footer class="card-footer">
+        <a href="Botones.html" title="Ir al menú principal">
+            <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo">
+        </a>
+    </footer>
+  </main>  
+
+<script>
+  const usuario = JSON.parse(localStorage.getItem('usuarioEditar'));
+  const index = localStorage.getItem('usuarioEditarIndex');
+
+  if (!usuario || index === null) {
+    alert("Error: No se encontraron datos para editar.");
+    window.location.href = "TBUsuarios.html";
+  }
+
+  // Rellenar campos en el formulario
+  document.getElementById('codigo').value = usuario.codigo;
+  document.getElementById('dni').value = usuario.dni;
+  document.getElementById('apellidos').value = usuario.apellidos;
+  document.getElementById('nombres').value = usuario.nombres;
+  document.getElementById('cargo').value = usuario.cargo;
+  document.getElementById('id').value = usuario.id;
+  document.getElementById('clave').value = usuario.clave;
+
+  // Validación y guardado
+  document.getElementById('formEditarUsuario').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    const nuevosDatos = {
+      codigo: document.getElementById('codigo').value.trim(),
+      dni: document.getElementById('dni').value.trim(),
+      apellidos: document.getElementById('apellidos').value.trim(),
+      nombres: document.getElementById('nombres').value.trim(),
+      cargo: document.getElementById('cargo').value.trim(),
+      id: document.getElementById('id').value.trim(),
+      clave: document.getElementById('clave').value.trim()
+    };
+
+    // Validar clave: mínimo 7 caracteres, debe incluir letras y números
+    const claveValida = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/;
+    if (!claveValida.test(nuevosDatos.clave)) {
+      alert("⚠️ La clave debe tener al menos 7 caracteres e incluir letras y números.");
+      return;
+    }
+
+    // Validar duplicados (excepto el índice actual)
+    const duplicado = usuarios.some((u, i) =>
+      i != index && (u.codigo === nuevosDatos.codigo || u.id === nuevosDatos.id)
+    );
+    if (duplicado) {
+      alert("⚠️ Ya existe otro usuario con el mismo Código o ID.");
+      return;
+    }
+
+    usuarios[index] = nuevosDatos;
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    localStorage.removeItem('usuarioEditar');
+    localStorage.removeItem('usuarioEditarIndex');
+
+    alert("✅ Usuario editado correctamente.");
+    window.location.href = "TBUsuarios.html";
+  });
+</script>
+
+
+</body>
+</html>

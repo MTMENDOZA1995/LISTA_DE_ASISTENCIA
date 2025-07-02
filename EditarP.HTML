@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDITAR DATOS DEL PERSONAL</title>
+  <link rel="stylesheet" href="RegistroP.css">
+</head>
+<body>
+
+  <main class="card">
+    <!-- ENCABEZADO -->
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBPersonal.html" title="Ver usuarios registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver usuarios registrados" class="icon">
+        </a>
+
+        <h1>EDITAR PERSONAL</h1>
+      </div>
+    </header>
+    
+  
+    <!-- FORMULARIO -->
+    <form class="card-form" id="formRegistroPersonal" autocomplete="off">
+      
+      <div class="form-group">
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Ej. P001" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" placeholder="8 dígitos" maxlength="8" required>
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos del personal" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Nombres del personal" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">Cargo:</label>
+        <input type="text" id="cargo" name="cargo" placeholder="Ej. Operario, Supervisor" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="FechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="FechaNacimiento" name="FechaNacimiento" placeholder="Ej. Operario, Supervisor" required>
+      </div>
+
+      <button type="submit">GUARDAR CAMBIOS</button>
+    </form>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo">
+      </a>
+    </footer>
+
+  </main>
+
+<script>
+  const persona = JSON.parse(localStorage.getItem('personalEditar'));
+  const index = localStorage.getItem('personalEditarIndex');
+
+  if (!persona || index === null) {
+    alert("Error: No se encontraron datos para editar.");
+    window.location.href = "TBPersonal.html";
+  }
+
+  // Rellenar los campos del formulario
+  document.getElementById('codigo').value = persona.codigo;
+  document.getElementById('dni').value = persona.dni;
+  document.getElementById('apellidos').value = persona.apellidos;
+  document.getElementById('nombres').value = persona.nombres;
+  document.getElementById('cargo').value = persona.cargo;
+  document.getElementById('FechaNacimiento').value = persona.fechaNacimiento || '';
+
+  // Manejar el envío del formulario editado
+  document.getElementById('formRegistroPersonal').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const personal = JSON.parse(localStorage.getItem('personal')) || [];
+
+    const nuevosDatos = {
+      codigo: document.getElementById('codigo').value.trim().toUpperCase(),
+      dni: document.getElementById('dni').value.trim(),
+      apellidos: document.getElementById('apellidos').value.trim().toUpperCase(),
+      nombres: document.getElementById('nombres').value.trim().toUpperCase(),
+      cargo: document.getElementById('cargo').value.trim().toUpperCase(),
+      fechaNacimiento: document.getElementById('FechaNacimiento').value.trim()
+    };
+
+    // Validar duplicados (ignorando el actual en edición)
+    const duplicado = personal.some((p, i) =>
+      i != index && (p.codigo === nuevosDatos.codigo || p.dni === nuevosDatos.dni)
+    );
+
+    if (duplicado) {
+      alert("Ya existe otro registro con el mismo CÓDIGO o DNI.");
+      return;
+    }
+
+    personal[index] = nuevosDatos;
+    localStorage.setItem('personal', JSON.stringify(personal));
+    localStorage.removeItem('personalEditar');
+    localStorage.removeItem('personalEditarIndex');
+
+    alert("Registro actualizado correctamente.");
+    window.location.href = "TBPersonal.html";
+  });
+</script>
+
+
+</body>
+</html>

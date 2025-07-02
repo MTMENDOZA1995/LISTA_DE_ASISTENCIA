@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REGISTRO DE ASISTENCIAS</title>
+  <style>
+    :root {
+      --color-principal: #1d3b20;
+      --color-fondo: #f5f7fa;
+      --color-tabla: #fff;
+      --color-texto: #333;
+      --color-hover: #e6f4ea;
+      --color-par: #f9f9f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+      color: var(--color-principal);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .icon-bar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .icon-bar a img {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .icon-bar a img:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    .contenedor-select {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contenedor-select label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-principal);
+      text-transform: uppercase;
+    }
+
+    select {
+      padding: 0.525rem 0.775rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #fff;
+      color: var(--color-texto);
+      min-width: 260px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--color-tabla);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    thead {
+      background-color: var(--color-principal);
+      color: #fff;
+    }
+
+    th, td {
+      padding: 0.875rem;
+      text-align: center;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      text-transform: uppercase;
+      letter-spacing: 0.1px;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--color-par);
+    }
+
+    tbody tr:hover {
+      background-color: var(--color-hover);
+    }
+
+    td[colspan] {
+      font-style: italic;
+      color: #777;
+    }
+
+    .boton-accion {
+      width: 40px;
+      height: 40px;
+      padding: 6px;
+      border: none;
+      border-radius: 6px;
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .boton-accion:hover {
+      transform: scale(1.15);
+    }
+
+    .boton-accion img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+      /* =======================
+    AJUSTES RESPONSIVOS
+  ======================= */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contenedor-select {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    select {
+      width: 100%;
+      min-width: unset;
+      font-size: 0.95rem;
+    }
+
+    .icon-bar {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 0.6rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .boton-accion {
+      width: 36px;
+      height: 36px;
+      padding: 4px;
+    }
+
+    .boton-accion img {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    body {
+      padding: 15px 10px;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+    }
+
+    select {
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      font-size: 0.7rem;
+    }
+
+    .card-footer {
+      font-size: 11px;
+      padding: 8px;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <div class="icon-bar">
+    <a href="Botones.html" title="Menú Principal">
+      <img src="Iconos/MENU1.webp" alt="Menú">
+    </a>
+    <a href="TBCrearLA.html" title="Regresar TBCrearLA">
+      <img src="Iconos/VOLVER.png" alt="Volver">
+    </a>
+    <a href="index.html" title="Cerrar Sesión">
+      <img src="Iconos/SALIR.png" alt="Cerrar Sesión">
+    </a>
+  </div>
+
+  <!-- Título principal -->
+  <h1>Registro de Asistencias</h1>
+
+  <!-- Selector de eventos y botones -->
+  <div class="contenedor-select">
+    <label for="eventoSelect">Evento:</label>
+    <select id="eventoSelect">
+      <option disabled selected>Seleccione un evento</option>
+    </select>
+
+    <button id="btnEliminarEvento" class="boton-accion" title="Eliminar Datos">
+      <img src="Iconos/ELIDATOS.png" alt="Eliminar" />
+    </button>
+
+    <button id="btnDescargarDatos" class="boton-accion" title="Descargar Datos">
+      <img src="Iconos/DESCARGAR1.webp" alt="Descargar" />
+    </button>
+  </div>
+
+  <!-- Tabla de asistencias -->
+  <table id="tablaAsistencias">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>DNI</th>
+        <th>Apellidos y Nombres</th>
+        <th>cargo</th>
+        <th>Fecha</th>
+        <th>Hora Entrada</th>
+        <th>Hora Salida</th>
+        <th>Tardanza (min)</th>
+        <th>Horas Trabajadas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="9">Seleccione un evento para ver los registros.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Librería Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</body>
+</html>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const eventoSelect = document.getElementById("eventoSelect");
+    const tbody = document.querySelector("#tablaAsistencias tbody");
+    const btnEliminar = document.getElementById("btnEliminarEvento");
+    const btnDescargar = document.getElementById("btnDescargarDatos");
+
+    const PREFIJO_CLAVE = "asistencia_";
+
+    // Mostrar mensaje en la tabla
+    const mostrarMensaje = (mensaje) => {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align:center; font-style:italic; color:#777;">${mensaje}</td>
+        </tr>
+      `;
+    };
+
+    // Cargar eventos desde localStorage
+    const cargarEventos = () => {
+      const claves = Object.keys(localStorage).filter(clave => clave.startsWith(PREFIJO_CLAVE));
+
+      if (claves.length === 0) {
+        mostrarMensaje("No hay registros de asistencia disponibles.");
+        return;
+      }
+
+      claves.forEach(clave => {
+        const nombreEvento = clave.replace(PREFIJO_CLAVE, "");
+        const opcion = new Option(nombreEvento, clave);
+        eventoSelect.appendChild(opcion);
+      });
+    };
+
+    // Cargar asistencias del evento seleccionado
+    const cargarAsistencias = (claveEvento) => {
+      const registros = JSON.parse(localStorage.getItem(claveEvento)) || [];
+
+      if (!registros.length) {
+        mostrarMensaje("No hay datos para este evento.");
+        return;
+      }
+
+      tbody.innerHTML = registros.map(r => `
+        <tr>
+          <td>${r.codigo}</td>
+          <td>${r.dni}</td>
+          <td>${r.apellidos} ${r.nombres}</td>
+          <td>${r.cargo}</td>
+          <td>${r.fecha}</td>
+          <td>${r.entrada || '-'}</td>
+          <td>${r.salida || '-'}</td>
+          <td>${r.tardanza ?? '-'}</td>
+          <td>${r.horasTrabajadas ?? '-'}</td>
+        </tr>
+      `).join("");
+    };
+
+    // Eliminar registros del evento
+    const eliminarEvento = () => {
+      const claveEvento = eventoSelect.value;
+
+      if (!claveEvento || claveEvento === "Seleccione un evento") {
+        alert("⚠️ Primero selecciona un evento válido.");
+        return;
+      }
+
+      const nombreEvento = claveEvento.replace(PREFIJO_CLAVE, "");
+
+      if (!confirm(`¿Deseas eliminar todos los registros del evento: "${nombreEvento}"?\nEsta acción no se puede deshacer.`)) {
+        return;
+      }
+
+      localStorage.removeItem(claveEvento);
+      alert(`✅ Registros del evento "${nombreEvento}" eliminados.`);
+
+      eventoSelect.querySelector(`option[value="${claveEvento}"]`)?.remove();
+      eventoSelect.selectedIndex = 0;
+      mostrarMensaje("Seleccione un evento para ver los registros.");
+    };
+
+    // Descargar registros del evento en Excel (mejorado)
+    const descargarDatos = () => {
+      const claveEvento = eventoSelect.value;
+
+      if (!claveEvento || claveEvento === "Seleccione un evento") {
+        alert("⚠️ Primero selecciona un evento válido.");
+        return;
+      }
+
+      const registros = JSON.parse(localStorage.getItem(claveEvento)) || [];
+
+      if (!registros.length) {
+        alert("⚠️ No hay datos para este evento.");
+        return;
+      }
+
+      const nombreEvento = claveEvento.replace(PREFIJO_CLAVE, "");
+
+      // Preparar datos
+      const datosExcel = registros.map(r => ({
+        "Código": r.codigo,
+        "DNI": r.dni,
+        "Apellidos y Nombres": `${r.apellidos} ${r.nombres}`,
+        "Cargo": r.cargo,
+        "Fecha": r.fecha,
+        "Hora Entrada": r.entrada || "-",
+        "Hora Salida": r.salida || "-",
+        "Tardanza (min)": r.tardanza ?? "-",
+        "Horas Trabajadas": r.horasTrabajadas ?? "-"
+      }));
+
+      // Crear hoja desde JSON con desplazamiento para agregar título
+      const hoja = XLSX.utils.json_to_sheet(datosExcel, { origin: "A2" });
+
+      // Agregar título en la primera fila
+      XLSX.utils.sheet_add_aoa(hoja, [[`REGISTRO DE ASISTENCIA - ${nombreEvento.toUpperCase()}`]], { origin: "A1" });
+
+      // Ajustar el ancho de las columnas
+      hoja["!cols"] = [
+        { wch: 10 },  // Código
+        { wch: 12 },  // DNI
+        { wch: 40 },  // Apellidos y Nombres
+        { wch: 40 },  // Cargo
+        { wch: 15 },  // Fecha
+        { wch: 14 },  // Entrada
+        { wch: 14 },  // Salida
+        { wch: 16 },  // Tardanza
+        { wch: 18 },  // Horas trabajadas
+      ];
+
+      const libro = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(libro, hoja, "Asistencia");
+
+      const nombreArchivo = `Asistencia_${nombreEvento.replace(/\s+/g, "_")}.xlsx`;
+      XLSX.writeFile(libro, nombreArchivo);
+    };
+
+    // Asignar eventos
+    eventoSelect.addEventListener("change", () => cargarAsistencias(eventoSelect.value));
+    btnEliminar.addEventListener("click", eliminarEvento);
+    btnDescargar.addEventListener("click", descargarDatos);
+
+    // Inicialización
+    cargarEventos();
+  });
+</script>
+
+</body>
+</html>

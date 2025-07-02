@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REGISTRAR ASISTENCIA</title>
+  <link rel="stylesheet" href="Asistencia.css" />
+</head>
+<body>
+  <main class="asistencia-card">
+
+    <!-- ENCABEZADO -->
+    <header class="card-header">
+      <div class="header-content">
+        <a href="index.html" title="VER EVENTOS REGISTRADOS">
+          <img src="Iconos/SALIR.png" alt="VER EVENTOS" class="icon" />
+        </a>
+        <h1 id="tituloEvento">EVENTO</h1>
+      </div>
+    </header>
+
+    <!-- FORMULARIO -->
+    <form id="formAsistencia" class="card-form" autocomplete="off">
+      <div class="form-group">
+        <label for="codigo">CÓDIGO:</label>
+        <input type="text" id="codigo" name="codigo" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="nombres">NOMBRES:</label>
+        <input type="text" id="nombres" name="nombres" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="cargo">CARGO:</label>
+        <input type="text" id="cargo" name="cargo" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="fecha">FECHA:</label>
+        <input type="date" id="fecha" name="fecha" readonly />
+      </div>
+
+      <div class="form-group">
+        <label for="hora">HORA:</label>
+        <input type="time" id="hora" name="hora" readonly />
+      </div>
+
+      <button type="submit" class="submit-btn">REGISTRAR</button>
+    </form>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="MENÚ PRINCIPAL">
+        <img src="Imagenes/ECFM.png" alt="LOGO ECO FRAME MAX" class="logo" />
+      </a>
+    </footer>
+  </main>
+</body>
+</html>
+
+
+<script>
+  const eventoSeleccionado = JSON.parse(localStorage.getItem("eventoSeleccionado"));
+
+  if (!eventoSeleccionado) {
+    alert("⚠️ NO SE HA SELECCIONADO NINGÚN EVENTO.");
+    window.location.href = "EIExLA.html";
+  }
+
+  // Inicializar campos
+  const inputFecha = document.getElementById("fecha");
+  const inputHora = document.getElementById("hora");
+  const inputCodigo = document.getElementById("codigo");
+  const tituloEvento = document.getElementById("tituloEvento");
+
+  tituloEvento.textContent = eventoSeleccionado.NombreEvento.toUpperCase();
+  const horaProgramada = eventoSeleccionado.HoraEntrante || "08:00";
+
+  // Establece la fecha y hora actual
+  const establecerFechaHoraActual = () => {
+    const ahora = new Date();
+    inputFecha.value = ahora.toISOString().split("T")[0];
+    inputHora.value = ahora.toTimeString().slice(0, 5);
+  };
+
+  establecerFechaHoraActual();
+  inputFecha.readOnly = true;
+  inputHora.readOnly = true;
+
+  // Autocompletar trabajador por código
+  inputCodigo.addEventListener("blur", () => {
+    const codigo = inputCodigo.value.trim().toUpperCase();
+    if (!codigo) return;
+
+    const listaPersonal = JSON.parse(localStorage.getItem("personal")) || [];
+    const trabajador = listaPersonal.find(p => p.codigo === codigo);
+
+    if (trabajador) {
+      document.getElementById("dni").value = trabajador.dni;
+      document.getElementById("apellidos").value = trabajador.apellidos;
+      document.getElementById("nombres").value = trabajador.nombres;
+      document.getElementById("cargo").value = trabajador.cargo;
+    } else {
+      alert("⚠️ CÓDIGO NO ENCONTRADO EN EL PERSONAL REGISTRADO.");
+      limpiarCampos();
+    }
+  });
+
+  // Registro de asistencia
+  document.getElementById("formAsistencia").addEventListener("submit", function (e) {
+    e.preventDefault();
+    establecerFechaHoraActual();
+
+    const codigo = inputCodigo.value.trim().toUpperCase();
+    const fecha = inputFecha.value;
+    const horaActual = inputHora.value;
+    const clave = `asistencia_${eventoSeleccionado.NombreEvento}`;
+    const asistencias = JSON.parse(localStorage.getItem(clave)) || [];
+
+    const registroExistente = asistencias.find(r => r.codigo === codigo && !r.salida);
+
+    if (registroExistente) {
+      const entradaMin = convertirAHoraEnMinutos(registroExistente.entrada);
+      const salidaMin = convertirAHoraEnMinutos(horaActual);
+      const totalMin = salidaMin - entradaMin;
+
+      registroExistente.salida = horaActual;
+      registroExistente.horasTrabajadas = convertirMinutosAHoras(totalMin);
+      registroExistente.tardanza = convertirMinutosAHoras(Math.max(0, entradaMin - convertirAHoraEnMinutos(horaProgramada)));
+
+      alert("✅ SALIDA REGISTRADA.");
+    } else if (asistencias.some(r => r.codigo === codigo && r.salida)) {
+      alert("⚠️ YA SE REGISTRARON ENTRADA Y SALIDA PARA ESTE EVENTO.");
+      this.reset();
+      establecerFechaHoraActual();
+      inputCodigo.focus();
+      return;
+    } else {
+      const entradaMin = convertirAHoraEnMinutos(horaActual);
+      const programadaMin = convertirAHoraEnMinutos(horaProgramada);
+      const tardanzaMin = Math.max(0, entradaMin - programadaMin);
+
+      asistencias.push({
+        codigo,
+        dni: document.getElementById("dni").value,
+        apellidos: document.getElementById("apellidos").value,
+        nombres: document.getElementById("nombres").value,
+        cargo: document.getElementById("cargo").value,
+        fecha,
+        entrada: horaActual,
+        salida: "",
+        tardanza: convertirMinutosAHoras(tardanzaMin),
+        horasTrabajadas: "0h 0min"
+      });
+
+      alert("✅ ENTRADA REGISTRADA.");
+    }
+
+    localStorage.setItem(clave, JSON.stringify(asistencias));
+    this.reset();
+    establecerFechaHoraActual();
+    inputCodigo.focus();
+  });
+
+  // Utilidades
+  const convertirAHoraEnMinutos = hora => {
+    const [h, m] = hora.split(":").map(Number);
+    return h * 60 + m;
+  };
+
+  const convertirMinutosAHoras = minutos => {
+    const h = Math.floor(minutos / 60);
+    const m = minutos % 60;
+    return `${h}h ${m}min`;
+  };
+
+  const limpiarCampos = () => {
+    ["dni", "apellidos", "nombres", "cargo"].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+  };
+</script>
+
+
+</body>
+</html>

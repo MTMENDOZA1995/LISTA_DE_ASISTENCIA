@@ -1,0 +1,183 @@
+/* ============ RESET ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============ BODY ============ */
+body {
+  background-color: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ============ TARJETA ============ */
+.asistencia-card {
+  width: 400px;
+  border: 1.5px solid #1d3b20;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+/* ============ ENCABEZADO ============ */
+.card-header {
+  background-color: #1d3b20;
+  color: #ffffff;
+  padding: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-header .icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain; /* Ajuste limpio sin deformar */
+}
+
+/* ============ NOMBRE DEL EVENTO ============ */
+.evento-nombre {
+  background-color: #1d3b20;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  padding: 2px;
+  font-size: 12px;
+}
+
+/* ============ FORMULARIO ============ */
+.card-form {
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-form label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #1d3b20;
+  margin: 10px 0 4px;
+}
+
+.card-form input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1.5px solid #ccc;
+  border-left: 4px solid #1d3b20;
+  border-radius: 4px;
+  background-color: #fefefe;
+}
+
+/* ============ BOTÓN ============ */
+.card-form button {
+  margin-top: 20px;
+  background-color: #1d3b20;
+  color: #ffffff;
+  padding: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-form button:hover {
+  background-color: #143117;
+}
+
+/* ============ PIE DE PÁGINA ============ */
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+.card-footer img {
+  height: 45px;
+}
+
+.card-footer span {
+  color: #1d3b20;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   ENCABEZADO DE LA TARJETA
+===================================================== */
+.card-header {
+  background-color: #1d3b20;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 0 0;
+}
+
+.card-header .header-content {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.card-header .icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: brightness(1) contrast(1);
+}
+
+.card-header .icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* ============ MEDIA QUERIES PARA MOVILES PEQUEÑOS ============ */
+@media (max-width: 400px) {
+  .card-form {
+    padding: 16px;
+  }
+
+  .card-header,
+  .evento-nombre {
+    font-size: 12px;
+  }
+
+  .card-form label,
+  .card-form input,
+  .card-form button {
+    font-size: 13px;
+  }
+
+  .card-footer span {
+    font-size: 12px;
+  }
+
+  .card-header .icon {
+    width: 20px;
+    height: 20px;
+  }
+}

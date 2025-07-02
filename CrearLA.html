@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CREAR EVENTO | ECO FRAME MAX</title>
+  <link rel="stylesheet" href="CrearLA.css" />
+</head>
+<body>
+
+  <main class="container">
+    
+    <!-- ENCABEZADO -->
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBCrearLA.html" title="Ver eventos registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver eventos registrados" class="icon" />
+        </a>
+        <h1>CREAR EVENTO</h1>
+      </div>
+    </header>
+
+    <!-- FORMULARIO PARA CREAR EVENTO -->
+    <form id="formAsistencia" class="form" autocomplete="off" novalidate>
+      
+      <div class="form-group">
+        <label for="nombre">NOMBRE DEL EVENTO:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. REUNIÓN MENSUAL" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <div class="form-group">
+        <label for="fecha">FECHA DEL EVENTO:</label>
+        <input type="date" id="fecha" name="fecha" required />
+      </div>
+
+      <div class="form-group">
+        <label for="hora">HORA DE ENTRADA:</label>
+        <input type="time" id="hora" name="hora" required />
+      </div>
+
+      <div class="form-group">
+        <label for="clave">CLAVE DE SEGURIDAD:</label>
+        <input type="password" id="clave" name="clave" placeholder="CLAVE SECRETA" minlength="4" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
+
+      <button type="submit" id="btnGuardar">CREAR Y GUARDAR</button>
+    </form>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo de Eco Frame Max" class="logo" />
+      </a>
+    </footer>
+
+  </main>
+
+</body>
+</html>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formAsistencia");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim().toUpperCase();
+      const fecha = document.getElementById("fecha").value.trim();
+      const hora = document.getElementById("hora").value.trim();
+      const clave = document.getElementById("clave").value.trim().toUpperCase();
+
+      if (!nombre || !fecha || !hora || !clave) {
+        alert("⚠️ POR FAVOR, COMPLETA TODOS LOS CAMPOS.");
+        return;
+      }
+
+      // Validación: clave con letras y números, y más letras que números
+      const letras = clave.replace(/[^A-Z]/gi, "").length;
+      const numeros = clave.replace(/[^0-9]/g, "").length;
+
+      if (clave.length < 6 || letras <= numeros || letras === 0 || numeros === 0) {
+        alert("⚠️ LA CLAVE DEBE TENER AL MENOS 6 CARACTERES, CONTENER LETRAS Y NÚMEROS, Y MÁS LETRAS QUE NÚMEROS.");
+        return;
+      }
+
+      const nuevoEvento = {
+        NombreEvento: nombre,
+        FechaEvento: fecha,
+        HoraEntrante: hora,
+        Clave: clave
+      };
+
+      const eventos = JSON.parse(localStorage.getItem("CrearLA")) || [];
+      const existe = eventos.some(e =>
+        e.NombreEvento === nombre && e.FechaEvento === fecha
+      );
+
+      if (existe) {
+        alert("⚠️ YA EXISTE UN EVENTO CON ESE NOMBRE EN LA MISMA FECHA.");
+        return;
+      }
+
+      eventos.push(nuevoEvento);
+      localStorage.setItem("CrearLA", JSON.stringify(eventos));
+
+      alert("✅ EVENTO CREADO Y GUARDADO CORRECTAMENTE.");
+      form.reset();
+      window.location.href = "TBCrearLA.html";
+    });
+  });
+</script>
+
+
+</body>
+</html>
+
