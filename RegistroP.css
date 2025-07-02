@@ -165,37 +165,85 @@ body {
 }
 
 /* =====================================================
-   RESPONSIVE PARA CELULARES (Samsung Galaxy S24 y similares)
+   RESPONSIVE PROFESIONAL PARA CELULARES (Samsung Galaxy S24 y similares)
 ===================================================== */
 @media (max-width: 430px) {
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    background-color: #f4f4f4;
+  }
+
+  .card {
+    width: 100vw;
+    max-width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .card-header {
-    padding: 12px;
-    font-size: 13px;
+    padding: 16px;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 0;
+    justify-content: center;
+  }
+
+  .card-header .header-content {
+    gap: 16px;
+  }
+
+  .card-header .icon {
+    width: 26px;
+    height: 26px;
   }
 
   .card-form {
     padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .card-form label {
-    font-size: 14px;
+    font-size: 0.95rem;
   }
 
   .card-form input,
   .card-form select {
-    font-size: 13px;
+    font-size: 0.95rem;
+    padding: 12px;
+    border-radius: 6px;
   }
 
   .card-form button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 1rem;
+    padding: 14px;
+    border-radius: 8px;
+    margin-top: 8px;
   }
 
   .card-footer {
-    font-size: 12px;
+    padding: 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
   }
 
   .card-footer .logo {
-    width: 65px;
+    width: 60px;
+    height: auto;
+    display: block;
+    margin: 6px auto 4px;
   }
 }
