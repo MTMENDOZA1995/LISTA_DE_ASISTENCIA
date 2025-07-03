@@ -112,20 +112,113 @@ body {
   margin-bottom: 5px;
 }
 
-<body>
-  <div class="menu-container">
-    <div class="menu-header">
-      <img src="logo.svg" class="icon-ecfm" alt="">
-      <span>MENÚ PRINCIPAL</span>
-    </div>
-    
-    <div class="menu-buttons">
-      <!-- Botones aquí -->
-    </div>
-    
-    <div class="menu-footer">
-      <img src="logo.svg" class="logo" alt="Logo">
-      <div>© 2025 Eco Frame Max</div>
-    </div>
-  </div>
-</body>
+/* ========== RESPONSIVE PROFESIONAL PARA SAMSUNG S24 Y OTROS CELULARES ========== */
+@media (max-width: 480px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100svh; /* Altura visible real en móviles */
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 0 !important;
+    box-shadow: none;
+  }
+
+  .menu-header {
+    font-size: 1rem;
+    padding: 16px;
+    background-color: #1d3b20;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 0 !important;
+  }
+
+  .menu-header .icon-ecfm {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .menu-buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .menu-buttons button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 2px solid #1d3b20;
+    background-color: #fff;
+    color: #1d3b20;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .menu-buttons button:hover {
+    background-color: #1d3b20;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+    transition: transform 0.2s ease;
+  }
+
+  .icon-link:hover .icon {
+    transform: scale(1.1);
+  }
+
+  .menu-footer {
+    padding: 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    background-color: #f4f6f5;
+    color: #1d3b20;
+    border-top: 1px solid #ccc;
+    flex-shrink: 0;
+    border-radius: 0 !important;
+  }
+
+  .menu-footer img.logo {
+    width: 70px;
+    height: auto;
+    margin: 6px auto 4px;
+    display: block;
+  }
+}
+
