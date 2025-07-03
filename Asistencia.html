@@ -12,9 +12,9 @@
     <!-- ENCABEZADO -->
     <header class="card-header">
       <div class="header-content">
-        <a href="#" onclick="cerrarSesion(event)">
+        <div title="CERRAR SESIÓN" onclick="cerrarSesion()" style="cursor: pointer;">
           <img src="Iconos/SALIR.png" alt="Cerrar sesión" class="icon">
-        </a>
+        </div>
         <h1 id="tituloEvento">EVENTO</h1>
       </div>
     </header>
@@ -209,10 +209,9 @@ document.getElementById("formAsistencia").addEventListener("submit", function (e
 
 <script>
   // Función para cerrar sesión
-  function cerrarSesion(e) {
-    if (e) e.preventDefault(); // Evita el enlace por defecto
-    alert("🔒 Sesión finalizada.");
-    sessionStorage.clear();
+  function cerrarSesion(mensaje) {
+    alert(mensaje || "🔒 Sesión finalizada.");
+    sessionStorage.clear(); // Limpia datos de sesión
     window.location.href = "index.html";
   }
 
