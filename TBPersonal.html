@@ -6,29 +6,29 @@
   <title>PERSONAL REGISTRADO | Eco Frame Max</title>
   <style>
     body {
+      margin: 0;
+      padding: 40px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #eef1f5;
-      padding: 40px;
-      margin: 0;
       color: #333;
     }
 
     .icon-bar {
       display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
       align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
     }
 
     .icon-bar a img {
-      width: 25px;
-      height: 25px;
+      width: 26px;
+      height: 26px;
       cursor: pointer;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     .icon-bar a img:hover {
-      transform: scale(1.15);
+      transform: scale(1.1);
       opacity: 0.8;
     }
 
@@ -36,9 +36,9 @@
       width: 100%;
       border-collapse: collapse;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
 
     caption {
@@ -46,9 +46,9 @@
       color: #fff;
       font-size: 22px;
       font-weight: bold;
-      padding: 18px;
-      text-transform: uppercase;
+      padding: 16px;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     thead {
@@ -57,19 +57,20 @@
     }
 
     th, td {
-      padding: 14px 12px;
+      padding: 14px;
       font-size: 15px;
-      border-bottom: 1px solid #e0e0e0;
       text-align: center;
+      border-bottom: 1px solid #e0e0e0;
     }
 
     th {
-      font-weight: 600;
       text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     tbody tr:nth-child(even) {
-      background-color: #f7fafc;
+      background-color: #f9fafc;
     }
 
     tbody tr:hover {
@@ -91,61 +92,124 @@
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    .icon-btn:hover {
-      transform: scale(1.15);
-      opacity: 0.8;
-    }
-
     .icon-btn img {
       width: 22px;
       height: 22px;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
     }
 
-  @media (max-width: 600px) {
-    body {
-      padding: 20px 10px;
+    .icon-btn:hover {
+      transform: scale(1.15);
+      opacity: 0.85;
     }
 
-    .icon-bar {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .icon-bar a img {
-      width: 22px;
-      height: 22px;
-    }
-
-    table {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    caption {
-      font-size: 18px;
-      padding: 14px;
-    }
-
-    th, td {
-      padding: 10px 8px;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .acciones {
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .icon-btn img {
-      width: 20px;
-      height: 20px;
-    }
+/* ✅ Optimización profesional para pantallas móviles (Samsung S24) */
+@media (max-width: 480px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: #eef1f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    font-size: 15px;
   }
+
+  .icon-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: transparent;
+  }
+
+  .icon-bar a img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .icon-bar a img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    border-radius: 0;
+  }
+
+  caption {
+    font-size: 17px;
+    padding: 12px;
+    background-color: #1d3b20;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  thead {
+    background-color: #1d3b20;
+    color: #fff;
+  }
+
+  th, td {
+    padding: 8px 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9fafc;
+  }
+
+  tbody tr:hover {
+    background-color: #e6f4ea;
+  }
+
+  .acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    padding: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .icon-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .icon-btn:hover {
+    transform: scale(1.1);
+  }
+}
 
   </style>
 </head>
@@ -224,7 +288,7 @@
     const persona = personal[index];
     localStorage.setItem('personalEditar', JSON.stringify(persona));
     localStorage.setItem('personalEditarIndex', index);
-    window.location.href = 'EditarP.HTML'; // <-- vínculo correcto al formulario
+    window.location.href = 'EditarP.html'; // <-- vínculo correcto al formulario
   }
 
   window.onload = cargarPersonal;
