@@ -205,22 +205,22 @@ body {
   .card-header .header-content {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
     flex-wrap: wrap;
   }
 
   .card-header .icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
   }
 
   .card-form {
     flex: 1;
-    padding: 20px 16px;
+    padding: 18px 16px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 13px;
     justify-content: flex-start;
     overflow-y: auto;
   }
@@ -232,8 +232,8 @@ body {
   }
 
   .card-form input {
-    font-size: 0.9rem;
-    padding: 12px;
+    font-size: 0.8rem;
+    padding: 10px;
     border-radius: 6px;
     border: 1.5px solid #ccc;
     border-left: 4px solid #1d3b20;
@@ -249,7 +249,7 @@ body {
 
   .card-form button {
     font-size: 0.9rem;
-    padding: 14px;
+    padding: 13px;
     border-radius: 8px;
     background-color: #1d3b20;
     color: #fff;
@@ -268,7 +268,7 @@ body {
   }
 
   .card-footer {
-    padding: 12px;
+    padding: 10px;
     font-size: 0.85rem;
     text-align: center;
     background-color: #f1f1f1;
@@ -281,7 +281,7 @@ body {
     width: 60px;
     height: auto;
     display: block;
-    margin: 8px auto 6px;
+    margin: 7px auto 5px;
   }
 
   .card-footer span {
