@@ -164,96 +164,121 @@ body {
   border-color: #1d3b20;
 }
 
-
-/* =====================================================
-   RESPONSIVE PROFESIONAL PARA SAMSUNG GALAXY S24 Y OTROS
-===================================================== */
+/* =============================================
+   RESPONSIVE PROFESIONAL PARA MÓVILES (Samsung Galaxy S24 y similares)
+============================================= */
 @media (max-width: 480px) {
   html, body {
-    width: 100%;
-    height: auto;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    display: block; /* Evita recortes por centrar con flex en pantallas pequeñas */
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
   }
 
   .card {
     width: 100%;
     max-width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
     border-radius: 0;
     box-shadow: none;
-    border: none;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 90vh;
   }
 
   .card-header {
-    padding: 16px;
-    font-size: 1rem;
+    padding: 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
     text-align: center;
-    border-radius: 0;
     background-color: #1d3b20;
-    color: white;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-header .header-content {
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-header .icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   .card-form {
-    flex: 1;
-    padding: 24px 16px;
+    padding: 20px 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    flex: 1;
   }
 
   .card-form label {
-    font-size: 1rem;
-    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: #333;
   }
 
   .card-form input,
   .card-form select {
-    font-size: 1rem;
-    padding: 14px;
+    font-size: 0.85rem;
+    padding: 12px;
     border-radius: 6px;
-    border: 1.5px solid #ccc;
-    border-left: 4px solid #1d3b20;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    outline: none;
+  }
+
+  .card-form input:focus,
+  .card-form select:focus {
+    border-color: #1d3b20;
+    box-shadow: 0 0 0 2px rgba(29, 59, 32, 0.15);
   }
 
   .card-form button {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 14px;
     border-radius: 8px;
-    margin-top: 12px;
     background-color: #1d3b20;
     color: #fff;
-    font-weight: bold;
     border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-form button:hover {
+    background-color: #163016;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .card-footer {
-    padding: 14px;
-    font-size: 0.9rem;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ccc;
+    padding: 10px;
+    font-size: 0.8rem;
     text-align: center;
+    background-color: #f1f1f1;
+    color: #555;
+    border-top: 1px solid #ccc;
   }
 
   .card-footer .logo {
     width: 60px;
-    margin: 8px auto 4px;
+    height: auto;
     display: block;
+    margin: 8px auto 6px;
   }
 }
