@@ -155,84 +155,140 @@ body {
   filter: brightness(1.2);
 }
 
-/* ============ RESPONSIVE PROFESIONAL PARA MOVILES (Galaxy S24 y similares) ============ */
+/* ============================================= 
+   RESPONSIVE PROFESIONAL PARA MÓVILES (Samsung Galaxy S24 y similares)
+============================================= */
 @media (max-width: 480px) {
   html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh;
-    overflow-x: hidden;
+    height: 100%;
+    min-height: 100svh;
     background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
     display: flex;
     flex-direction: column;
   }
 
   .asistencia-card {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: none;
+    min-height: 100%;
+    border-radius: 0 !important;
   }
 
   .card-header,
   .evento-nombre {
-    font-size: 0.95rem;
-    padding: 12px;
+    padding: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-align: center;
+    background-color: #1d3b20;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 !important;
+  }
+
+  .card-header .header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .card-header .icon {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
 
   .card-form {
+    flex: 1;
     padding: 20px 16px;
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: flex-start;
     overflow-y: auto;
   }
 
   .card-form label {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    color: #1d3b20;
+    font-weight: 600;
   }
 
   .card-form input {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 12px;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    border-left: 4px solid #1d3b20;
+    background-color: #fff;
+    outline: none;
+    width: 100%;
+  }
+
+  .card-form input:focus {
+    border-color: #1d3b20;
+    box-shadow: 0 0 0 2px rgba(29, 59, 32, 0.15);
   }
 
   .card-form button {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 14px;
-    margin-top: 20px;
-    border-radius: 6px;
+    border-radius: 8px;
+    background-color: #1d3b20;
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-form button:hover {
+    background-color: #143117;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .card-footer {
-    padding: 14px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    padding: 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #1d3b20;
+    border-top: 1px solid #ccc;
     flex-shrink: 0;
   }
 
-  .card-footer img {
-    height: 40px;
+  .card-footer .logo {
+    width: 60px;
+    height: auto;
+    display: block;
+    margin: 8px auto 6px;
   }
 
   .card-footer span {
     font-size: 0.9rem;
-    color: #1d3b20;
     font-weight: 600;
+    display: block;
     text-align: center;
   }
 }
+
