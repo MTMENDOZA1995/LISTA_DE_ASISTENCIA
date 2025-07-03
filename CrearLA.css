@@ -196,102 +196,132 @@ body {
   filter: brightness(1.2);
 }
 
-/* =================== RESPONSIVE MEJORADO PARA S24 Y MÓVILES =================== */
+/* =================== RESPONSIVE PROFESIONAL PARA S24 Y MÓVILES =================== */
 @media (max-width: 480px) {
   html, body {
-    width: 100%;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg-gradient, #f8f9fa);
-    font-family: var(--font-main);
-    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 100%;
-    min-height: 100vh;
+    background-color: #ffffff;
     border-radius: 0;
     box-shadow: none;
     border: none;
-    display: flex;
-    flex-direction: column;
   }
 
   .header {
     font-size: 1rem;
     padding: 16px;
     text-align: center;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color, #1d3b20);
     color: white;
-    border-radius: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
   }
 
   .form {
-    padding: 20px 16px;
     flex: 1;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .form label {
-    font-size: 1rem;
-    margin-bottom: 4px;
+    font-size: 0.9rem;
+    color: #333;
   }
 
   .form input,
   .form select {
-    font-size: 1rem;
-    padding: 14px;
+    font-size: 0.95rem;
+    padding: 12px;
     border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
-    border: 1.5px solid var(--input-border);
+    border: 1.5px solid var(--input-border, #ccc);
+    background-color: #fff;
+    outline: none;
+    width: 100%;
+  }
+
+  .form input:focus,
+  .form select:focus {
+    border-color: var(--primary-color, #1d3b20);
+    box-shadow: 0 0 0 2px rgba(29, 59, 32, 0.15);
   }
 
   .form button {
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 14px;
     border-radius: 10px;
     margin-top: 20px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color, #1d3b20);
     color: #fff;
     font-weight: 700;
     border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form button:hover {
+    background-color: #163016;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .footer {
     padding: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--footer-bg, #f9f9f9);
+    font-size: 0.85rem;
+    text-align: center;
+    background-color: var(--footer-bg, #f4f6f5);
+    color: #1d3b20;
     border-top: 1px solid #ccc;
+    flex-shrink: 0;
   }
 
   .footer img {
-    height: 40px;
+    height: 38px;
+    display: block;
+    margin: 0 auto 6px;
   }
 
   .footer span {
-    font-size: 0.9rem;
+    display: block;
+    font-size: 0.85rem;
     font-weight: 600;
-    text-align: center;
   }
 
   .card-footer {
     font-size: 0.8rem;
     padding: 10px;
     text-align: center;
+    color: #444;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ccc;
+    flex-shrink: 0;
   }
 
   .card-footer .logo {
     width: 65px;
-    margin: 6px auto;
+    height: auto;
     display: block;
+    margin: 8px auto 4px;
   }
 }
-
 
