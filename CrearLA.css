@@ -196,26 +196,27 @@ body {
   filter: brightness(1.2);
 }
 
-/* =================== RESPONSIVE OPTIMIZADO PARA CELULAR (S24) =================== */
-@media (max-width: 430px) {
+/* =================== RESPONSIVE MEJORADO PARA S24 Y MÓVILES =================== */
+@media (max-width: 480px) {
   html, body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: var(--bg-gradient, #f8f9fa);
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
   }
 
   .container {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
     border-radius: 0;
-    border: none;
     box-shadow: none;
+    border: none;
     display: flex;
     flex-direction: column;
   }
@@ -224,6 +225,8 @@ body {
     font-size: 1rem;
     padding: 16px;
     text-align: center;
+    background-color: var(--primary-color);
+    color: white;
     border-radius: 0;
   }
 
@@ -234,33 +237,38 @@ body {
   }
 
   .form label {
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-bottom: 4px;
   }
 
-  .form input {
+  .form input,
+  .form select {
     font-size: 1rem;
-    padding: 12px;
+    padding: 14px;
     border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    border: 1.5px solid var(--input-border);
   }
 
   .form button {
     font-size: 1rem;
-    padding: 13px;
+    padding: 14px;
     border-radius: 10px;
     margin-top: 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 700;
+    border: none;
   }
 
   .footer {
-    padding: 10px 14px;
-    flex-shrink: 0;
+    padding: 12px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
     background-color: var(--footer-bg, #f9f9f9);
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #ccc;
   }
 
   .footer img {
@@ -269,20 +277,21 @@ body {
 
   .footer span {
     font-size: 0.9rem;
-    text-align: center;
     font-weight: 600;
+    text-align: center;
   }
 
   .card-footer {
     font-size: 0.8rem;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
   }
 
   .card-footer .logo {
     width: 65px;
-    height: auto;
     margin: 6px auto;
     display: block;
   }
 }
+
+
