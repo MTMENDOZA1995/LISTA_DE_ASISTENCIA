@@ -37,86 +37,68 @@
 </html>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("loginForm");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
 
-    if (!form) return;
+  if (!form) return;
 
-    // Crear usuario predeterminado si no hay usuarios registrados
-    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+  // Crear usuario predeterminado si no existe ninguno
+  const usuariosExistentes = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    if (usuariosGuardados.length === 0) {
-      const usuarioInicial = {
-        codigo: "116224516",
-        dni: "73372032",
-        apellidos: "MENDOZA ACUÑA",
-        nombres: "MAX TAYSON",
-        cargo: "GERENTE",
-        id: "MTMENDOZA",
-        clave: "C8KM1Y0F1I3K1S6H",
-      };
-      localStorage.setItem("usuarios", JSON.stringify([usuarioInicial]));
-      console.log("Usuario inicial creado: MTMENDOZA / C8KM1Y0F1I3K1S6H");
+  if (usuariosExistentes.length === 0) {
+    const usuarioInicial = {
+      codigo: "116224516",
+      dni: "73372032",
+      apellidos: "MENDOZA ACUÑA",
+      nombres: "MAX TAYSON",
+      cargo: "GERENTE",
+      id: "MTMENDOZA",
+      clave: "C8KM1Y0F1I3K1S6H"
+    };
+    localStorage.setItem("usuarios", JSON.stringify([usuarioInicial]));
+    console.info("✅ Usuario inicial creado: MTMENDOZA / C8KM1Y0F1I3K1S6H");
+  }
+
+  // Validar el formulario al hacer submit
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const usuarioInput = document.getElementById("usuario").value.trim().toUpperCase();
+    const claveInput = document.getElementById("contrasena").value.trim();
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const usuarioEncontrado = usuarios.find(u =>
+      u.id.toUpperCase() === usuarioInput && u.clave === claveInput
+    );
+
+    if (!usuarioEncontrado) {
+      alert("❌ Usuario o contraseña incorrectos.");
+      return;
     }
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const usuario    = document.getElementById("usuario").value.trim().toUpperCase();
-      const contrasena = document.getElementById("contrasena").value.trim();
-      const usuarios   = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-      const usuarioEncontrado = usuarios.find(u =>
-        u.id.toUpperCase() === usuario && u.clave === contrasena
-      );
-
-      if (!usuarioEncontrado) {
-        alert("USUARIO O CONTRASEÑA INCORRECTOS.");
-        return;
-      }
-
-      // ✅ ACTIVAR LA SESIÓN
-      sessionStorage.setItem("sesionActiva", "true");
-
-      alert(`¡BIENVENIDO, ${usuarioEncontrado.nombres.toUpperCase()}!`);
-
-      const cargo = usuarioEncontrado.cargo.trim().toLowerCase();
-
-      switch (cargo) {
-        case "gerente":
-          window.location.href = "Botones.html";
-          break;
-        case "supervisor":
-        case "administrador":
-        case "asistente":
-          window.location.href = "BotonesADM.html";
-          break;
-        default:
-          window.location.href = "BotonesInv.html";
-          break;
-      }
-    });
-  });
-</script>
-
-
-<script>
-document.getElementById("btnLogin").addEventListener("click", function () {
-  const usuario = document.getElementById("usuario").value;
-  const clave = document.getElementById("clave").value;
-
-  if (usuario === "admin" && clave === "1234") {
-    // ✅ Usuario válido
+    // Activar sesión
     sessionStorage.setItem("sesionActiva", "true");
-    localStorage.removeItem("sesionActiva"); // 🔁 Permite reingreso desde historial
+    localStorage.removeItem("sesionActiva"); // Evita el regreso con botón "atrás"
 
-    window.location.href = "Botones.html"; // o la página principal
-  } else {
-    alert("❌ Usuario o contraseña incorrectos.");
-  }
+    alert(`👋 ¡Bienvenido, ${usuarioEncontrado.nombres.toUpperCase()}!`);
+
+    // Redirigir según cargo
+    const cargo = usuarioEncontrado.cargo.trim().toLowerCase();
+
+    const rutasPorCargo = {
+      "gerente": "Botones.html",
+      "supervisor": "BotonesADM.html",
+      "administrador": "BotonesAdm.html",
+      "asistente": "BotonesADM.html"
+    };
+
+    const rutaDestino = rutasPorCargo[cargo] || "BotonesInv.html";
+    window.location.href = rutaDestino;
+  });
 });
 </script>
 
 
 </body>
 </html>
+
