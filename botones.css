@@ -121,7 +121,7 @@ body {
     height: 100%;
     background-color: #f8f9fa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;     /* ✅ evitar scroll horizontal */
     display: flex;
     flex-direction: column;
   }
@@ -136,6 +136,7 @@ body {
     border: none;
     border-radius: 0 !important;
     box-shadow: none;
+    min-height: 100vh;
   }
 
   .menu-header {
@@ -218,4 +219,3 @@ body {
     margin-right: auto;
   }
 }
-
