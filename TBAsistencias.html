@@ -151,68 +151,90 @@
     height: 100%;
     min-height: 100dvh;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f7fa;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
   }
 
   h1 {
-    font-size: 1.15rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin: 1rem 0;
     text-align: center;
     color: #1d3b20;
     text-transform: uppercase;
   }
 
   .contenedor-select {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    text-align: center;
-  }
-
-  .contenedor-select label {
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  select {
-    width: 100%;
-    max-width: 300px;
-    font-size: 0.88rem;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1.5px solid #ccc;
-    background-color: #fff;
-  }
-
-  .icon-bar {
-    justify-content: center;
-    flex-wrap: wrap;
     gap: 0.75rem;
     margin-bottom: 1rem;
   }
 
+  .contenedor-select label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1d3b20;
+    text-align: center;
+  }
+
+  select {
+    width: 100%;
+    max-width: 320px;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .icon-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 1rem 0;
+  }
+
+  .icon-bar a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    transition: all 0.2s ease-in-out;
+  }
+
   .icon-bar a img {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
     transition: transform 0.2s ease;
   }
 
-  .icon-bar a img:hover {
-    transform: scale(1.1);
-    opacity: 0.85;
+  .icon-bar a:hover {
+    background-color: #e6f4ea;
+    transform: scale(1.05);
   }
 
   table {
-    display: block;
     width: 100%;
     overflow-x: auto;
+    display: block;
     border-radius: 10px;
+    background-color: #ffffff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1rem;
   }
 
   thead {
@@ -221,10 +243,15 @@
   }
 
   th, td {
-    padding: 0.5rem;
-    font-size: 0.7rem;
+    padding: 0.6rem;
+    font-size: 0.75rem;
     white-space: nowrap;
     text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
   }
 
   tbody tr:hover {
@@ -239,21 +266,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
   }
 
   .boton-accion img {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
   }
 
   .card-footer {
-    font-size: 0.75rem;
-    padding: 8px;
+    font-size: 0.78rem;
+    padding: 10px;
     text-align: center;
     background-color: #f1f1f1;
     color: #1d3b20;
     border-top: 1px solid #ccc;
+    flex-shrink: 0;
+  }
+
+  .card-footer img {
+    width: 60px;
+    margin: 6px auto;
+    display: block;
   }
 }
 
