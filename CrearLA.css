@@ -202,10 +202,14 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    min-height: 100svh;
+    background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg-gradient, #f8f9fa);
-    overflow: hidden;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
     display: flex;
     flex-direction: column;
   }
@@ -216,10 +220,11 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 100%;
-    background-color: #ffffff;
-    border-radius: 0;
+    margin: 0 auto;
+    background: #ffffff;
     box-shadow: none;
-    border: none;
+    min-height: 100%;
+    border-radius: 0 !important;
   }
 
   .header {
@@ -231,6 +236,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.5px;
     flex-shrink: 0;
+    border-radius: 0 !important;
   }
 
   .form {
@@ -324,4 +330,3 @@ body {
     margin: 8px auto 4px;
   }
 }
-
