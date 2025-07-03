@@ -112,26 +112,27 @@ body {
   margin-bottom: 5px;
 }
 
-/* ========== RESPONSIVE PARA SAMSUNG S24 Y OTROS CELULARES ========== */
+/* ========== RESPONSIVE PROFESIONAL PARA SAMSUNG S24 Y OTROS CELULARES ========== */
 @media (max-width: 480px) {
   html, body {
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
     margin: 0;
-    overflow: hidden;
-    touch-action: none;
-    -webkit-user-select: none;
-    user-select: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     background-color: #f8f9fa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .menu-container {
-    width: 100vw;
-    height: 100vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    background-color: #ffffff;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -139,12 +140,11 @@ body {
   }
 
   .menu-header {
-    font-size: 1.0rem;
+    font-size: 1rem;
     padding: 16px;
     background-color: #1d3b20;
     color: white;
     font-weight: bold;
-    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,6 +165,7 @@ body {
     justify-content: center;
     padding: 20px 16px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .menu-buttons button {
@@ -200,9 +201,8 @@ body {
   }
 
   .menu-footer {
-    font-size: 0.80rem;
+    font-size: 0.8rem;
     padding: 10px;
-    border-radius: 0;
     text-align: center;
     color: #1d3b20;
     background-color: #f4f6f5;
@@ -214,5 +214,8 @@ body {
     width: 70px;
     height: auto;
     margin-bottom: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
