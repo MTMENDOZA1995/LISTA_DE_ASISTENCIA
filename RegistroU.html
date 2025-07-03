@@ -164,12 +164,13 @@
 </script>
 
 <script>
-  // Función para cerrar sesión
   function cerrarSesion(mensaje) {
     alert(mensaje || "🔒 Sesión finalizada.");
-    sessionStorage.clear(); // Limpia datos de sesión
-    window.location.href = "index.html";
+    sessionStorage.clear();
+    localStorage.setItem("sesionActiva", "no"); // 🚫 Bandera adicional
+    window.location.href = "index.html";        // Redirige normalmente
   }
+
 
   // Validar si hay sesión activa al cargar la página
   window.addEventListener("DOMContentLoaded", () => {
@@ -201,5 +202,22 @@
   });
 </script>
 
+<script>
+  function validarSesion() {
+    const activa = sessionStorage.getItem("sesionActiva");
+    const activaLocal = localStorage.getItem("sesionActiva");
+
+    if (activa !== "true" || activaLocal === "no") {
+      localStorage.removeItem("sesionActiva"); // Limpia bandera
+      alert("⚠️ ACCESO DENEGADO. SESIÓN CERRADA.");
+      window.location.href = "index.html";
+    }
+  }
+
+  // 🔄 Se ejecuta al cargar o al volver desde historial
+  window.addEventListener("pageshow", validarSesion);
+</script>
+
 </body>
 </html>
+
