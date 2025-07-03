@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Menú Principal</title>
   <link rel="stylesheet" href="botones.css">
 </head>
@@ -9,7 +10,7 @@
   <div class="menu-container">
     <div class="menu-header">
       <a href="index.html" title="Ver usuarios registrados" class="icon-link">
-        <img src="Iconos/SALIR.png" alt="Cerrar sesión" class="icon" onclick="cerrarSesion()">
+       <img src="Iconos/SALIR.png" alt="Cerrar sesión" class="icon" onclick="cerrarSesion()">
       </a>
       <h2 class="menu-title">MENÚ</h2>
     </div>
@@ -24,12 +25,13 @@
       <p><strong> </strong>
 
 <script>
-  // Función para cerrar sesión
   function cerrarSesion(mensaje) {
     alert(mensaje || "🔒 Sesión finalizada.");
-    sessionStorage.clear(); // Limpia datos de sesión
-    window.location.href = "index.html";
+    sessionStorage.clear();
+    localStorage.setItem("sesionActiva", "no"); // 🚫 Bandera adicional
+    window.location.href = "index.html";        // Redirige normalmente
   }
+
 
   // Validar si hay sesión activa al cargar la página
   window.addEventListener("DOMContentLoaded", () => {
@@ -59,4 +61,20 @@
   window.addEventListener("beforeunload", () => {
     // Opcional: puedes guardar el tiempo de salida si deseas
   });
+</script>
+
+<script>
+  function validarSesion() {
+    const activa = sessionStorage.getItem("sesionActiva");
+    const activaLocal = localStorage.getItem("sesionActiva");
+
+    if (activa !== "true" || activaLocal === "no") {
+      localStorage.removeItem("sesionActiva"); // Limpia bandera
+      alert("⚠️ ACCESO DENEGADO. SESIÓN CERRADA.");
+      window.location.href = "index.html";
+    }
+  }
+
+  // 🔄 Se ejecuta al cargar o al volver desde historial
+  window.addEventListener("pageshow", validarSesion);
 </script>
