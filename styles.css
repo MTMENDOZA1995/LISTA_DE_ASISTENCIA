@@ -173,10 +173,10 @@ button:hover {
   }
 
   .logo-box img {
-    width: 75%;
-    max-width: 140px;
+    width: 90%;
+    max-width: 180px;
     display: block;
-    margin: 0 auto 16px;
+    margin: 0 auto 20px;
   }
 
   .form-group {
