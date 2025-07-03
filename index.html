@@ -100,5 +100,23 @@
 </script>
 
 
+<script>
+document.getElementById("btnLogin").addEventListener("click", function () {
+  const usuario = document.getElementById("usuario").value;
+  const clave = document.getElementById("clave").value;
+
+  if (usuario === "admin" && clave === "1234") {
+    // ✅ Usuario válido
+    sessionStorage.setItem("sesionActiva", "true");
+    localStorage.removeItem("sesionActiva"); // 🔁 Permite reingreso desde historial
+
+    window.location.href = "Botones.html"; // o la página principal
+  } else {
+    alert("❌ Usuario o contraseña incorrectos.");
+  }
+});
+</script>
+
+
 </body>
 </html>
