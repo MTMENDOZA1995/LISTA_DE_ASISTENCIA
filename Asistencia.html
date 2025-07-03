@@ -118,60 +118,75 @@
   });
 
   // Registro de asistencia
-  document.getElementById("formAsistencia").addEventListener("submit", function (e) {
-    e.preventDefault();
-    establecerFechaHoraActual();
+document.getElementById("formAsistencia").addEventListener("submit", function (e) {
+  e.preventDefault();
+  establecerFechaHoraActual();
 
-    const codigo = inputCodigo.value.trim().toUpperCase();
-    const fecha = inputFecha.value;
-    const horaActual = inputHora.value;
-    const clave = `asistencia_${eventoSeleccionado.NombreEvento}`;
-    const asistencias = JSON.parse(localStorage.getItem(clave)) || [];
+  const codigo = inputCodigo.value.trim().toUpperCase();
+  const fecha = inputFecha.value;
+  const horaActual = inputHora.value;
+  const clave = `asistencia_${eventoSeleccionado.NombreEvento}`;
+  const asistencias = JSON.parse(localStorage.getItem(clave)) || [];
 
-    const registroExistente = asistencias.find(r => r.codigo === codigo && !r.salida);
+  // ✅ Verificar que el código exista en la lista del personal
+  const listaPersonal = JSON.parse(localStorage.getItem("personal")) || [];
+  const trabajador = listaPersonal.find(p => p.codigo === codigo);
 
-    if (registroExistente) {
-      const entradaMin = convertirAHoraEnMinutos(registroExistente.entrada);
-      const salidaMin = convertirAHoraEnMinutos(horaActual);
-      const totalMin = salidaMin - entradaMin;
-
-      registroExistente.salida = horaActual;
-      registroExistente.horasTrabajadas = convertirMinutosAHoras(totalMin);
-      registroExistente.tardanza = convertirMinutosAHoras(Math.max(0, entradaMin - convertirAHoraEnMinutos(horaProgramada)));
-
-      alert("✅ SALIDA REGISTRADA.");
-    } else if (asistencias.some(r => r.codigo === codigo && r.salida)) {
-      alert("⚠️ YA SE REGISTRARON ENTRADA Y SALIDA PARA ESTE EVENTO.");
-      this.reset();
-      establecerFechaHoraActual();
-      inputCodigo.focus();
-      return;
-    } else {
-      const entradaMin = convertirAHoraEnMinutos(horaActual);
-      const programadaMin = convertirAHoraEnMinutos(horaProgramada);
-      const tardanzaMin = Math.max(0, entradaMin - programadaMin);
-
-      asistencias.push({
-        codigo,
-        dni: document.getElementById("dni").value,
-        apellidos: document.getElementById("apellidos").value,
-        nombres: document.getElementById("nombres").value,
-        cargo: document.getElementById("cargo").value,
-        fecha,
-        entrada: horaActual,
-        salida: "",
-        tardanza: convertirMinutosAHoras(tardanzaMin),
-        horasTrabajadas: "0h 0min"
-      });
-
-      alert("✅ ENTRADA REGISTRADA.");
-    }
-
-    localStorage.setItem(clave, JSON.stringify(asistencias));
+  if (!trabajador) {
+    alert("❌ CÓDIGO NO AUTORIZADO. EL PERSONAL NO ESTÁ REGISTRADO.");
     this.reset();
     establecerFechaHoraActual();
     inputCodigo.focus();
-  });
+    return;
+  }
+
+  const registroExistente = asistencias.find(r => r.codigo === codigo && !r.salida);
+
+  if (registroExistente) {
+    const entradaMin = convertirAHoraEnMinutos(registroExistente.entrada);
+    const salidaMin = convertirAHoraEnMinutos(horaActual);
+    const totalMin = salidaMin - entradaMin;
+
+    registroExistente.salida = horaActual;
+    registroExistente.horasTrabajadas = convertirMinutosAHoras(totalMin);
+    registroExistente.tardanza = convertirMinutosAHoras(
+      Math.max(0, entradaMin - convertirAHoraEnMinutos(horaProgramada))
+    );
+
+    alert("✅ SALIDA REGISTRADA.");
+  } else if (asistencias.some(r => r.codigo === codigo && r.salida)) {
+    alert("⚠️ YA SE REGISTRARON ENTRADA Y SALIDA PARA ESTE EVENTO.");
+    this.reset();
+    establecerFechaHoraActual();
+    inputCodigo.focus();
+    return;
+  } else {
+    const entradaMin = convertirAHoraEnMinutos(horaActual);
+    const programadaMin = convertirAHoraEnMinutos(horaProgramada);
+    const tardanzaMin = Math.max(0, entradaMin - programadaMin);
+
+    asistencias.push({
+      codigo,
+      dni: trabajador.dni,
+      apellidos: trabajador.apellidos,
+      nombres: trabajador.nombres,
+      cargo: trabajador.cargo,
+      fecha,
+      entrada: horaActual,
+      salida: "",
+      tardanza: convertirMinutosAHoras(tardanzaMin),
+      horasTrabajadas: "0h 0min"
+    });
+
+    alert("✅ ENTRADA REGISTRADA.");
+  }
+
+  localStorage.setItem(clave, JSON.stringify(asistencias));
+  this.reset();
+  establecerFechaHoraActual();
+  inputCodigo.focus();
+});
+
 
   // Utilidades
   const convertirAHoraEnMinutos = hora => {
@@ -232,3 +247,4 @@
 
 </body>
 </html>
+
