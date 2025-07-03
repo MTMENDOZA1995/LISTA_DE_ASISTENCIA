@@ -155,29 +155,84 @@ body {
   filter: brightness(1.2);
 }
 
-/* ============ MEDIA QUERIES PARA MOVILES PEQUEÑOS ============ */
-@media (max-width: 400px) {
-  .card-form {
-    padding: 16px;
+/* ============ RESPONSIVE PROFESIONAL PARA MOVILES (Galaxy S24 y similares) ============ */
+@media (max-width: 480px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .asistencia-card {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   .card-header,
   .evento-nombre {
-    font-size: 12px;
-  }
-
-  .card-form label,
-  .card-form input,
-  .card-form button {
-    font-size: 13px;
-  }
-
-  .card-footer span {
-    font-size: 12px;
+    font-size: 0.95rem;
+    padding: 12px;
+    text-align: center;
   }
 
   .card-header .icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .card-form {
+    padding: 20px 16px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .card-form label {
+    font-size: 0.95rem;
+  }
+
+  .card-form input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .card-form button {
+    font-size: 1rem;
+    padding: 14px;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+
+  .card-footer {
+    padding: 14px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .card-footer img {
+    height: 40px;
+  }
+
+  .card-footer span {
+    font-size: 0.9rem;
+    color: #1d3b20;
+    font-weight: 600;
+    text-align: center;
   }
 }
