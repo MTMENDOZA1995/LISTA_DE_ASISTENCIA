@@ -1,292 +1,223 @@
-/* =====================================================
-   RESET BÁSICO
-===================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>REGISTRAR USUARIO | Registro de Usuario</title>
+  <link rel="stylesheet" href="RegistroU.css">
+</head>
+<body>
 
-/* =====================================================
-   ESTILO GENERAL DEL BODY
-===================================================== */
-body {
-  background-color: #f4f4f4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+  <main class="card">
+    <header class="card-header">
+      <div class="header-content">
+        <a href="TBUsuarios.html" title="Ver usuarios registrados">
+          <img src="Iconos/LUPA1.png" alt="Ver usuarios registrados" class="icon">
+        </a>
+        <h1>REGISTRAR USUARIO</h1>
+      </div>
+    </header>
 
-/* =====================================================
-   TARJETA PRINCIPAL
-===================================================== */
-.card {
-  width: 400px;
-  background-color: #ffffff;
-  border: 1.5px solid #1d3b20;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
+    <form class="card-form" id="formRegistroPersonal" autocomplete="off">
+      <div class="form-group">
+        <label for="codigo">CÓDIGO:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Coloque un codigo registrado" required>
+      </div>
 
-/* =====================================================
-   ENCABEZADO DE LA TARJETA
-===================================================== */
-.card-header {
-  background-color: #1d3b20;
-  color: #ffffff;
-  padding: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px 8px 0 0;
-}
+      <div class="form-group">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" placeholder="Autollenado" maxlength="8" inputmode="numeric" readonly onfocus="this.blur()">
+      </div>
 
-.card-header .header-content {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
+      <div class="form-group">
+        <label for="apellidos">APELLIDOS:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Autollenado" readonly onfocus="this.blur()">
+      </div>
 
-.card-header .icon {
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  filter: brightness(1) contrast(1);
-}
+      <div class="form-group">
+        <label for="nombres">NOMBRES:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Autollenado" readonly onfocus="this.blur()">
+      </div>
 
-.card-header .icon:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
-}
+      <div class="form-group">
+        <label for="cargo">CARGO:</label>
+        <select id="cargo" name="cargo" required>
+          <option value="" disabled selected>Selecciona un cargo</option>
+          <option value="supervisor">SUPERVISOR</option>
+          <option value="administrador">ADMINISTRADOR</option>
+          <option value="asistente">ASISTENTE</option>
+          <option value="operario">TECNICO</option>
+        </select>
+      </div>  
 
+      <div class="form-group">
+        <label for="iD">ID:</label>
+        <input type="text" id="id" name="id" placeholder="Cree un Usuario" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
 
-/* =====================================================
-   FORMULARIO DE REGISTRO
-===================================================== */
-.card-form {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
+      <div class="form-group">
+        <label for="clave">Contraseña:</label>
+        <input type="password" id="clave" name="clave" placeholder="Cree una contraseña" minlength="6" maxlength="20" required oninput="this.value = this.value.toUpperCase()" />
+      </div>
 
-/* Campos en línea (fila doble) */
-.card-form .row {
-  display: flex;
-  gap: 12px;
-}
+      <button type="submit">REGISTRAR Y GUARDAR</button>
+    </form>
 
-.card-form .row .form-group {
-  flex: 1;
-}
+    <footer class="card-footer">
+      <a href="Botones.html" title="Ir al menú principal">
+        <img src="Imagenes/ECFM.png" alt="Logo Eco Frame Max" class="logo">
+      </a>
+    </footer>
+  </main>
 
-/* Etiquetas */
-.card-form label {
-  font-size: 15px;
-  font-weight: bold;
-  color: #1d3b20;
-  margin-bottom: 3px;
-  display: block;
-}
+<script>
+  // Autocompletar campos desde localStorage "personal"
+  document.getElementById('codigo').addEventListener('blur', function () {
+    const codigo = this.value.trim().toUpperCase();
+    if (!codigo) {
+      limpiarCampos();
+      return;
+    }
 
-/* Inputs */
-.card-form input {
-  width: 100%;
-  padding: 8px;
-  font-size: 13px;
-  border: 1.5px solid #ccc;
-  border-left: 4px solid #1d3b20;
-  border-radius: 4px;
-  background-color: #fefefe;
-}
+    const personal = JSON.parse(localStorage.getItem('personal')) || [];
+    const persona = personal.find(p => p.codigo === codigo);
 
-/* Botón */
-.card-form button {
-  margin-top: 1px;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  background-color: #1d3b20;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    if (persona) {
+      document.getElementById('dni').value = persona.dni || '';
+      document.getElementById('apellidos').value = persona.apellidos || '';
+      document.getElementById('nombres').value = persona.nombres || '';
+      document.getElementById('cargo').value = persona.cargo || '';
+      // document.getElementById('fechaNacimiento').value = persona.fechaNacimiento || '';
+    } else {
+      limpiarCampos();
+      alert("⚠️ Primero registre al nuevo personal.");
+    }
+  });
 
-.card-form button:hover {
-  background-color: #143117;
-}
-
-/* =====================================================
-   PIE DE TARJETA / FOOTER
-===================================================== */
-.card-footer {
-  background-color: #ffffff;
-  color: #1d3b20;
-  text-align: center;
-  padding: 5px;
-  font-size: 1px;
-  font-weight: bold;
-  border-top: 1px solid #ccc;
-}
-
-.card-footer .logo {
-  width: 80px;
-  height: auto;
-  display: block;
-  margin: 0 auto 6px;
-}
-
-
-/* ===================================================== */
-.form-group select {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 2px solid #ccd5cc;
-  border-left: 5px solid #1d3b20;
-  border-radius: 6px;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
-}
-
-.form-group select:focus {
-  outline: none;
-  border-color: #1d3b20;
-}
-
-/* ============================================= 
-   RESPONSIVE PROFESIONAL PARA MÓVILES (Samsung Galaxy S24 y similares)
-============================================= */
-@media (max-width: 480px) {
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100svh;
-    background-color: #f4f4f4;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
-    display: flex;
-    flex-direction: column;
+  function limpiarCampos() {
+    document.getElementById('dni').value = '';
+    document.getElementById('apellidos').value = '';
+    document.getElementById('nombres').value = '';
+    document.getElementById('cargo').value = '';
   }
 
-  .card {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    background: #ffffff;
-    box-shadow: none;
-    min-height: 100%;
-    border-radius: 0 !important;
+  // Guardar usuario
+  document.getElementById('formRegistroPersonal').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const usuario = {
+      codigo: document.getElementById('codigo').value.trim().toUpperCase(),
+      dni: document.getElementById('dni').value.trim(),
+      apellidos: document.getElementById('apellidos').value.trim().toUpperCase(),
+      nombres: document.getElementById('nombres').value.trim().toUpperCase(),
+      cargo: document.getElementById('cargo').value.trim().toUpperCase(),
+      id: document.getElementById('id').value.trim().toUpperCase(),
+      clave: document.getElementById('clave').value.trim()
+    };
+
+    // Validación de campos vacíos
+    for (const campo in usuario) {
+      if (!usuario[campo]) {
+        alert("⚠️ Por favor, completa todos los campos.");
+        return;
+      }
+    }
+
+    // Validación de DNI (8 dígitos numéricos)
+    if (!/^\d{8}$/.test(usuario.dni)) {
+      alert("⚠️ El DNI debe tener exactamente 8 dígitos.");
+      return;
+    }
+
+    // Validación de clave (mínimo 7 caracteres, letras y números)
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/.test(usuario.clave)) {
+      alert("⚠️ La clave debe tener al menos 7 caracteres e incluir letras y números.");
+      return;
+    }
+
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Validación de duplicados
+    if (usuarios.some(u => u.id === usuario.id)) {
+      alert("⚠️ El ID ya está registrado.");
+      return;
+    }
+
+    if (usuarios.some(u => u.codigo === usuario.codigo)) {
+      alert("⚠️ El CÓDIGO ya está registrado.");
+      return;
+    }
+
+    if (usuarios.some(u => u.dni === usuario.dni)) {
+      alert("⚠️ El DNI ya está registrado.");
+      return;
+    }
+
+    // Guardar usuario
+    usuarios.push(usuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    alert('✅ Usuario registrado correctamente.');
+    this.reset();
+    window.location.href = 'TBUsuarios.html';
+  });
+</script>
+
+<script>
+  function cerrarSesion(mensaje) {
+    alert(mensaje || "🔒 Sesión finalizada.");
+    sessionStorage.clear();
+    localStorage.setItem("sesionActiva", "no"); // 🚫 Bandera adicional
+    window.location.href = "index.html";        // Redirige normalmente
   }
 
-  .card-header {
-    padding: 16px;
-    font-size: 0.8rem; /TAMAÑO DE LA LETRA DEL ENCABEZADO
-    font-weight: 600;
-    text-align: center;
-    background-color: #1d3b20;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 !important;
+
+  // Validar si hay sesión activa al cargar la página
+  window.addEventListener("DOMContentLoaded", () => {
+    // Si no hay sesión activa, redirigir inmediatamente
+    if (!sessionStorage.getItem("sesionActiva")) {
+      cerrarSesion("⚠️ ACCESO NO AUTORIZADO. SESIÓN CERRADA.");
+      return;
+    }
+
+    // Redirigir por inactividad
+    let timer;
+    const reiniciarTemporizador = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        cerrarSesion("⏰ INACTIVIDAD DETECTADA. SESIÓN CERRADA.");
+      }, 5 * 60 * 1000); // 5 minutos
+    };
+
+    ["mousemove", "keydown", "click", "scroll"].forEach(evento => {
+      document.addEventListener(evento, reiniciarTemporizador);
+    });
+
+    reiniciarTemporizador();
+  });
+
+  // Al recargar o cerrar la pestaña, la sesión sigue activa
+  window.addEventListener("beforeunload", () => {
+    // Opcional: puedes guardar el tiempo de salida si deseas
+  });
+</script>
+
+<script>
+  function validarSesion() {
+    const activa = sessionStorage.getItem("sesionActiva");
+    const activaLocal = localStorage.getItem("sesionActiva");
+
+    if (activa !== "true" || activaLocal === "no") {
+      localStorage.removeItem("sesionActiva"); // Limpia bandera
+      alert("⚠️ ACCESO DENEGADO. SESIÓN CERRADA.");
+      window.location.href = "index.html";
+    }
   }
 
-  .card-header .header-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  // 🔄 Se ejecuta al cargar o al volver desde historial
+  window.addEventListener("pageshow", validarSesion);
+</script>
 
-  .card-header .icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-  }
+</body>
+</html>
 
-  .card-form {
-    flex: 1;
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    justify-content: flex-start;
-  }
-
-  .card-form label {
-    font-size: 0.85rem;
-    color: #333;
-  }
-
-  .card-form input,
-  .card-form select {
-    font-size: 0.85rem;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    outline: none;
-    width: 100%;
-  }
-
-  .card-form input:focus,
-  .card-form select:focus {
-    border-color: #1d3b20;
-    box-shadow: 0 0 0 2px rgba(29, 59, 32, 0.15);
-  }
-
-  .card-form button {
-    font-size: 0.9rem;
-    padding: 14px;
-    border-radius: 8px;
-    background-color: #1d3b20;
-    color: #fff;
-    border: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .card-form button:hover {
-    background-color: #163016;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .card-footer {
-    padding: 12px;
-    font-size: 0.8rem;
-    text-align: center;
-    background-color: #f1f1f1;
-    color: #555;
-    border-top: 1px solid #ccc;
-    flex-shrink: 0;
-  }
-
-  .card-footer .logo {
-    width: 60px;
-    height: auto;
-    display: block;
-    margin: 8px auto 6px;
-  }
-}
