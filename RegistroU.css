@@ -164,7 +164,7 @@ body {
   border-color: #1d3b20;
 }
 
-/* =============================================
+/* ============================================= 
    RESPONSIVE PROFESIONAL PARA MÓVILES (Samsung Galaxy S24 y similares)
 ============================================= */
 @media (max-width: 480px) {
@@ -172,30 +172,34 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    min-height: 100svh;
     background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
     -webkit-user-select: none;
     user-select: none;
     touch-action: manipulation;
+    display: flex;
+    flex-direction: column;
   }
 
   .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
     background: #ffffff;
     border-radius: 0;
     box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    min-height: 90vh;
+    min-height: 100%;
   }
 
   .card-header {
-    padding: 14px;
-    font-size: 0.8rem;
+    padding: 16px;
+    font-size: 0.9rem;
     font-weight: 600;
     text-align: center;
     background-color: #1d3b20;
@@ -218,11 +222,12 @@ body {
   }
 
   .card-form {
+    flex: 1;
     padding: 20px 16px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    flex: 1;
+    justify-content: flex-start;
   }
 
   .card-form label {
@@ -238,6 +243,7 @@ body {
     border: 1px solid #ccc;
     background-color: #fff;
     outline: none;
+    width: 100%;
   }
 
   .card-form input:focus,
@@ -267,12 +273,13 @@ body {
   }
 
   .card-footer {
-    padding: 10px;
+    padding: 12px;
     font-size: 0.8rem;
     text-align: center;
     background-color: #f1f1f1;
     color: #555;
     border-top: 1px solid #ccc;
+    flex-shrink: 0;
   }
 
   .card-footer .logo {
