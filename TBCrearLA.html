@@ -103,52 +103,87 @@
       opacity: 0.85;
     }
 
-  /* ============================
-    AJUSTES PARA DISPOSITIVOS MÓVILES
-  ============================= */
-  @media (max-width: 600px) {
-    body {
-      padding: 20px 12px;
-    }
-
-    .icon-bar {
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .icon-bar a img {
-      width: 22px;
-      height: 22px;
-    }
-
-    table {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    caption {
-      font-size: 18px;
-      padding: 12px;
-    }
-
-    th, td {
-      font-size: 13px;
-      padding: 10px 6px;
-      white-space: nowrap;
-    }
-
-    .acciones {
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .icon-btn img {
-      width: 20px;
-      height: 20px;
-    }
+/* 📱 Optimizado profesionalmente para Samsung Galaxy S24 y móviles similares */
+@media (max-width: 480px) {
+  html, body {
+    margin: 0;
+    padding: 0 12px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-size: 15px;
+    background-color: #eef1f5;
+    -webkit-overflow-scrolling: touch;
   }
+
+  .icon-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .icon-bar a img {
+    width: 26px;
+    height: 26px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .icon-bar a img:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  caption {
+    font-size: 17px;
+    padding: 10px 16px;
+    background-color: #1d3b20;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  thead {
+    background-color: #1d3b20;
+    color: #fff;
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 8px 6px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .icon-btn {
+    padding: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .icon-btn img {
+    width: 22px;
+    height: 22px;
+  }
+}
 
   </style>
 </head>
