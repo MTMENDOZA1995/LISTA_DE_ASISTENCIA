@@ -134,9 +134,8 @@ body {
     max-width: 100%;
     background-color: #ffffff;
     border: none;
-    border-radius: 0;
+    border-radius: 0 !important;
     box-shadow: none;
-    overflow: hidden;
   }
 
   .menu-header {
@@ -150,6 +149,7 @@ body {
     justify-content: center;
     gap: 6px;
     flex-shrink: 0;
+    border-radius: 0 !important;
   }
 
   .menu-header .icon-ecfm {
@@ -159,12 +159,11 @@ body {
   }
 
   .menu-buttons {
-    flex: 1;
+    flex: 1; /* ✅ ocupa todo el espacio disponible */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 20px 16px;
-    overflow-y: auto;
+    overflow-y: auto; /* ✅ permite scroll si hay muchos botones */
     -webkit-overflow-scrolling: touch;
   }
 
@@ -207,7 +206,7 @@ body {
     color: #1d3b20;
     background-color: #f4f6f5;
     border-top: 1px solid #ccc;
-    flex-shrink: 0;
+    flex-shrink: 0; /* ✅ evita que se reduzca */
   }
 
   .menu-footer img.logo {
@@ -219,3 +218,4 @@ body {
     margin-right: auto;
   }
 }
+
