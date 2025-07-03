@@ -147,29 +147,36 @@ body {
   font-size: 14px;
 }
 
-/* ======================= RESPONSIVE ESPECÍFICO PARA CELULARES ======================= */
+/* ======================= RESPONSIVE PROFESIONAL PARA MÓVILES (Samsung S24) ======================= */
 @media screen and (max-width: 480px) {
   html, body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100svh; /* ✅ Mejor que 100vh para dispositivos móviles */
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    background-color: #f8f9fa;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
     touch-action: manipulation;
     -webkit-user-select: none;
     user-select: none;
-    font-size: 16px; /* base para escalar */
-    background-color: #f8f9fa;
   }
 
   .menu-container {
-    width: 100vw;
-    height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    display: flex;
-    flex-direction: column;
+    background-color: #ffffff;
+    min-height: 100svh; /* ✅ asegura altura completa */
   }
 
   .menu-header {
@@ -177,15 +184,20 @@ body {
     padding: 16px;
     text-align: center;
     font-weight: bold;
+    color: white;
+    background-color: #1d3b20;
+    flex-shrink: 0;
   }
 
   .menu-buttons {
-    flex: 1;
+    flex: 1; /* ✅ ocupa el espacio entre header y footer */
     padding: 20px 16px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 16px;
   }
 
   .menu-buttons button,
@@ -193,10 +205,22 @@ body {
     font-size: 1rem;
     padding: 14px;
     border-radius: 8px;
-    margin-bottom: 14px;
+    border: 2px solid #1d3b20;
+    background-color: #ffffff;
+    color: #1d3b20;
     text-align: center;
-    word-wrap: break-word;
+    font-weight: 600;
+    text-transform: uppercase;
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .menu-buttons button:hover,
+  .evento-btn:hover {
+    background-color: #1d3b20;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   .evento-btn {
@@ -209,7 +233,6 @@ body {
   .evento-btn .texto {
     flex: 1;
     text-align: center;
-    font-weight: 600;
   }
 
   .evento-btn .icon-left,
@@ -218,25 +241,28 @@ body {
     height: 24px;
   }
 
-  .card-footer,
-  .menu-footer {
-    padding: 10px;
+  .menu-footer,
+  .card-footer {
+    flex-shrink: 0; /* ✅ asegura que siempre sea visible */
+    padding: 12px;
     font-size: 0.85rem;
     text-align: center;
     background-color: #f4f6f5;
-    border-top: 1px solid #ddd;
-  }
-
-  .card-footer span,
-  .menu-footer span {
-    font-weight: bold;
+    border-top: 1px solid #ccc;
     color: #1d3b20;
   }
 
-  .card-footer img.logo,
-  .menu-footer img.logo {
+  .menu-footer img.logo,
+  .card-footer img.logo {
     width: 65px;
     height: auto;
-    margin-bottom: 5px;
+    display: block;
+    margin: 6px auto 4px;
+  }
+
+  .menu-footer span,
+  .card-footer span {
+    display: block;
+    font-weight: bold;
   }
 }
